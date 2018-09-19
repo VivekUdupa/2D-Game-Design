@@ -271,21 +271,106 @@ posi3.h = 90;
 posi3.w = 400;
 
 //Mountain
+//M1
+Vector2f m1(258,185);	
+Vector2f m2(302,179);	
+Vector2f m3(384,187);	
+
+//M2
+Vector2f m4(339,168);	
+Vector2f m5(302,179);	
+Vector2f m6(384,187);	
 	
-	
+//M3
+Vector2f m7(339,168);	
+Vector2f m8(399,170);	
+Vector2f m9(384,187);	
+
+//M4
+Vector2f m10(453,197);	
+Vector2f m11(399,170);	
+Vector2f m12(384,187);	
+
+//M5
+Vector2f m13(453,197);	
+Vector2f m14(399,170);	
+Vector2f m15(459,171);	
+
+//M6
+Vector2f m16(453,197);	
+Vector2f m17(596,183);	
+Vector2f m18(459,171);	
+
+//M7
+Vector2f m19(341,169);	
+Vector2f m20(461,177);	
+Vector2f m21(401,77);	
+
+//M8
+Vector2f m22(341,169);	
+Vector2f m23(401,173);	
+Vector2f m24(401,77);	
+
+//M9
+Vector2f m25(594,183);	
+Vector2f m26(401,173);	
+Vector2f m27(510,0);	
+
+//M9
+Vector2f m28(510,183);	
+Vector2f m29(401,173);	
+Vector2f m30(510,0);	
+
+//Bottom Rock Shade
+
+//shade1
+Vector2f s1(200,250);
+Vector2f s2(440,250);
+Vector2f s3(320,350);
+//shade2
+Vector2f s4(320,350);
+Vector2f s5(440,250);
+Vector2f s6(320,450);
+//shade3
+Vector2f s7(200,250);
+Vector2f s8(320,450);
+Vector2f s9(320,350);
+
+
+
+
+
+
+
 
 	//Layer 1
-	SDL_SetRenderDrawColor(renderer, 139, 69, 19, 255); //saddle brown
+	SDL_SetRenderDrawColor(renderer, 105, 105, 105, 255); //dim grey
 	DrawFilledTriangle tri1(renderer, t1, t2, t3 );
 	tri1.draw();	
 	
 	DrawFilledTriangle tri2(renderer, t7, t8, t9 );
 	tri2.draw();	
 	
-	SDL_SetRenderDrawColor(renderer, 210, 105, 30, 255); //chocolate
+	SDL_SetRenderDrawColor(renderer, 169, 169, 169, 255); //dark grey
 	DrawFilledTriangle tri3(renderer, t4, t5, t6 );
 	tri3.draw();	
     
+	SDL_RenderPresent(renderer);
+
+	//Bottom Rock Shade
+	DrawFilledTriangle shad1(renderer, s1, s2, s3 );
+	SDL_SetRenderDrawColor(renderer, 169, 169, 169, 255); //dark grey
+	shad1.draw();	
+	
+	SDL_SetRenderDrawColor(renderer, 192, 192, 192, 255); //silver
+	DrawFilledTriangle shad2(renderer, s4, s5, s6 );
+	shad2.draw();	
+
+	SDL_SetRenderDrawColor(renderer, 128, 128, 128, 255); //grey
+	DrawFilledTriangle shad3(renderer, s7, s8, s9 );
+	shad3.draw();	
+
+
 	SDL_RenderPresent(renderer);
 	
 	//Cloud 2
@@ -456,9 +541,49 @@ posi3.w = 400;
     rect3.draw();
 	SDL_RenderPresent(renderer);
 	
+	//Mountain
+	//M1
+	SDL_SetRenderDrawColor(renderer, 139, 69, 19, 255); //saddle brown
+	DrawFilledTriangle mnt1(renderer, m1, m2, m3 );
+	mnt1.draw();	
+	//M2
+	SDL_SetRenderDrawColor(renderer, 210, 105, 30, 255); //chocolate
+	DrawFilledTriangle mnt2(renderer, m4, m5, m6 );
+	mnt2.draw();	
+	//M3
+	SDL_SetRenderDrawColor(renderer, 244,164,96, 255); //sandy brown
+	DrawFilledTriangle mnt3(renderer, m7, m8, m9 );
+	mnt3.draw();	
+	//M4
+	SDL_SetRenderDrawColor(renderer, 139, 69, 19, 255); //saddle brown
+	DrawFilledTriangle mnt4(renderer, m10, m11, m12 );
+	mnt4.draw();	
+	//M5
+	SDL_SetRenderDrawColor(renderer, 210, 105, 30, 255); //chocolate
+	DrawFilledTriangle mnt5(renderer, m13, m14, m15 );
+	mnt5.draw();	
+	//M6
+	SDL_SetRenderDrawColor(renderer, 155, 69, 19, 255); //saddle brown*
+	DrawFilledTriangle mnt6(renderer, m16, m17, m18 );
+	mnt6.draw();	
+	//M9
+	SDL_SetRenderDrawColor(renderer, 210, 105, 30, 255); //chocolate
+	DrawFilledTriangle mnt9(renderer, m25, m26, m27 );
+	mnt9.draw();	
+	//M10
+	SDL_SetRenderDrawColor(renderer, 139, 69, 19, 255); //saddle brown
+	DrawFilledTriangle mnt10(renderer, m28, m29, m30 );
+	mnt10.draw();	
+	//M7
+	SDL_SetRenderDrawColor(renderer, 244,164,96, 255); //sandy brown
+	DrawFilledTriangle mnt7(renderer, m19, m20, m21 );
+	mnt7.draw();	
+	//M8
+	SDL_SetRenderDrawColor(renderer, 210, 105, 30, 255); //chocolate
+	DrawFilledTriangle mnt8(renderer, m22, m23, m24 );
+	mnt8.draw();	
 
-
-
+	SDL_RenderPresent(renderer);
 
 //***************************************************************************//
     writeName(renderer);
