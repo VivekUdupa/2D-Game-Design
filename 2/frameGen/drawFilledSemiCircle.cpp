@@ -2,18 +2,9 @@
 
 DrawFilledSemiCircle::DrawFilledSemiCircle(SDL_Renderer* r, SDL_Point c, int rad, SDL_Color col, int w, int h) : renderer(r), center(c),radius(rad),color(col), WIDTH(w), HEIGHT(h), uniqId(Id++) {}
 
-/*
-DrawFilledSemiCircle::DrawFilledSemiCircle(DrawFilledSemiCircle &p)
-{
-	renderer = p.renderer;
-	center = p.center;
-	radius = p.radius;
-	color = p.color;
-	WIDTH = p.WIDTH;
-	HEIGHT = p.HEIGHT;
-	
-}
-*/
+
+DrawFilledSemiCircle::DrawFilledSemiCircle(DrawFilledSemiCircle &p): renderer(p.renderer), center(p.center), radius(p.radius), color(p.color), WIDTH(p.WIDTH), HEIGHT(p.HEIGHT), uniqId(Id++) {}
+
 
 void DrawFilledSemiCircle::draw() const {
   	SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);

@@ -11,7 +11,7 @@ class DrawFilledSemiCircle{
 public:
 	DrawFilledSemiCircle(SDL_Renderer*, SDL_Point, int, SDL_Color, int, int);
 
-	//	DrawFilledSemiCircle(DrawFilledSemiCircle &);
+	DrawFilledSemiCircle(DrawFilledSemiCircle &);
 
 	friend std::ostream& operator<<(std::ostream& out, const DrawFilledSemiCircle& semiC);
 
