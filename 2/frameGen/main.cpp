@@ -339,7 +339,7 @@ int main(void) {
 	SDL_Color color2 = {220,220,220,255};
 	SDL_Color color3 = {255,255,255,255};
 
-/*
+
 	DrawFilledCircle cir4(renderer, center4, 20, color1);
 	DrawFilledCircle cir5(renderer, center5, 40, color2);
 	DrawFilledCircle cir6(renderer, center6, 25, color3);
@@ -353,7 +353,7 @@ int main(void) {
 	DrawFilledRectangle rect2(renderer, posi2);
 	rect2.draw();
 	SDL_RenderPresent(renderer);
-*/
+
 	//Layer2
 
 	SDL_SetRenderDrawColor(renderer, 0, 170, 0, 255); // green
@@ -558,6 +558,7 @@ int main(void) {
 	semi1.draw();
 
 	std::cout << semi1;
+	std::cout << semi2;
 
 
 

@@ -11,16 +11,16 @@ class DrawFilledSemiCircle{
 public:
 	DrawFilledSemiCircle(SDL_Renderer*, SDL_Point, int, SDL_Color, int, int);
 
-//	std::ostream& operator<< (std::ostream&, const const const const const const const const DrawFilledSemiCircle&);  //output overload
-	
-friend std::ostream& operator<<(std::ostream& out, const DrawFilledSemiCircle& semiC);
+	//	DrawFilledSemiCircle(DrawFilledSemiCircle &);
+
+	friend std::ostream& operator<<(std::ostream& out, const DrawFilledSemiCircle& semiC);
 
 	void draw() const;
 	
-	~DrawFilledSemiCircle() {}; //Destructor
+	//~DrawFilledSemiCircle() {}; //Destructor
 	
 	
-
+/*
 private:
 	SDL_Renderer* renderer;
 public:
@@ -34,4 +34,15 @@ public:
 	int uniqId;
 private:
 	static int Id;
+*/
+private:
+	SDL_Renderer* renderer;
+	SDL_Point center;
+	int radius;
+	SDL_Color color;
+	int WIDTH;
+	int HEIGHT;
+	static int Id;
+	int uniqId;
+
 };
