@@ -79,7 +79,8 @@ int main(void) {
 	DrawClouds(renderer, center10, 40, smoke);
 	DrawClouds(renderer, center11, 55, silverGrey);
 	DrawClouds(renderer, center12, 40, smoke);
-	
+
+
 	
 	//***************************************************************************//
 	writeName(renderer);
@@ -501,5 +502,8 @@ void DrawClouds(SDL_Renderer* renderer, SDL_Point center, int radius, SDL_Color 
 	
 	DrawFilledSemiCircle clud(renderer, center, radius, color, WIDTH, HEIGHT);
 	clud.draw();
+	
+	//Demo of the output operator overload of DrawFillSemiCircle class
+	std::cout << clud << std::endl;
 }
 
