@@ -11,6 +11,7 @@ OBJS = \
   vector2f.o \
   drawFilledTriangle.o \
   drawFilledCircle.o \
+  drawFilledSemiCircle.o \
   drawFilledRectangle.o \
   main.o \
 
