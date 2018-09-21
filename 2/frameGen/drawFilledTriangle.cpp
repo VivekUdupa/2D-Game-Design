@@ -1,8 +1,8 @@
 #include "drawFilledTriangle.h"
 
 //DrawFilledTriangle::DrawFilledTriangle(SDL_Window* w, SDL_Renderer* r, const Vector2f& x, const Vector2f& y, const Vector2f& z) 
-DrawFilledTriangle::DrawFilledTriangle(SDL_Renderer* r, const Vector2f& x, const Vector2f& y, const Vector2f& z) 
-  : renderer(r), v0(x), v1(y), v2(z) {}                     
+DrawFilledTriangle::DrawFilledTriangle(SDL_Renderer* r, const Vector2f& x, const Vector2f& y, const Vector2f& z, SDL_Color c) 
+  : renderer(r), v0(x), v1(y), v2(z), color(c) {}                     
 
 void DrawFilledTriangle::draw() const {
   float x = smallest(v0[0],v1[0],v2[0]);
@@ -15,6 +15,7 @@ void DrawFilledTriangle::draw() const {
   Vector2f box1( x, y ); 
   std::cout << "box1: " << box1 << std::endl;
 
+  SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
   for (int x = box0[0]; x <= box1[0]; ++x) {
     for (int y = box0[1]; y <= box1[1]; ++y) {
       Vector2f p(x, y);

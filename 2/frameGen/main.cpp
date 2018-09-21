@@ -1,5 +1,26 @@
 #include "main.h"
 
+void DrawBase(SDL_Renderer* renderer);
+void DrawGrass(SDL_Renderer* renderer);
+void DrawTree();
+void DrawMountain();
+void DrawClouds();
+
+// Define Colors
+SDL_Color dimGrey = {105, 105, 105, 255};
+SDL_Color darkGrey = { 169, 169, 169, 255}; 
+SDL_Color lightGrey = { 211, 211, 211, 255}; 
+SDL_Color silverGrey = { 192, 192, 192, 255}; 
+SDL_Color grey = { 128, 128, 128, 255}; 
+
+SDL_Color slDarkGreen = {10, 140, 10, 255};
+SDL_Color darkGreen = {0, 100, 0, 255};
+SDL_Color green = {0, 128, 0, 255};
+SDL_Color forestGreen = {34, 139, 34, 255};
+SDL_Color limeGreen = {50, 205, 50, 255};
+SDL_Color springGreen = {0, 255, 127, 255};
+SDL_Color yellowGreen = {154, 205, 50, 255};
+
 int main(void) {
   try {
     if ( SDL_Init(SDL_INIT_VIDEO) != 0 ) {
@@ -55,89 +76,7 @@ int main(void) {
 
 // ********************DRAWING CODE HERE***********************************************
 
-	//Layer 1 - Brown Base 
-	//Triangle 1
-	Vector2f t1(100,250);
-	Vector2f t2(300,250);
-	Vector2f t3(200,420);
 
-	//Triangle 2
-	Vector2f t4(200,250);
-	Vector2f t5(440,250);
-	Vector2f t6(320,450);
-
-	//Triangle 3
-	Vector2f t7(340,250);
-	Vector2f t8(540,250);
-	Vector2f t9(440,420);
-
-	//Layer2 - Green Base
-	//G1
-	Vector2f t10(72,214);
-	Vector2f t11(119,283);
-	Vector2f t12(200,250);
-
-	//G2
-	Vector2f t13(72,214);
-	Vector2f t14(235,167);
-	Vector2f t15(200,250);
-
-	//G3
-	Vector2f t16(440,167);
-	Vector2f t17(235,167);
-	Vector2f t18(200,250);
-
-	//G4
-	Vector2f t19(440,167);
-	Vector2f t20(596,185);
-	Vector2f t21(401,251);
-
-	//G5
-	Vector2f t22(200,250);
-	Vector2f t23(440,167);
-	Vector2f t24(401,251);
-
-	//G6
-	Vector2f t25(596,185);
-	Vector2f t26(541,251);
-	Vector2f t27(401,251);
-
-	//Layer 3 - green shade
-
-	//G7
-	Vector2f t28(127,266);
-	Vector2f t29(200,251);
-	Vector2f t30(72,214);
-	//G8
-	Vector2f t31(127,266);
-	Vector2f t32(119,283);
-	Vector2f t33(200,251);
-	//G9
-	Vector2f t34(127,266);
-	Vector2f t35(119,283);
-	Vector2f t36(72,214);
-
-	//G10
-	Vector2f t37(200,251);
-	Vector2f t38(368,221);
-	Vector2f t39(437,260);
-	//G11
-	Vector2f t40(368,221);
-	Vector2f t41(437,260);
-	Vector2f t42(454,197);
-	//G12
-	Vector2f t43(596,182);
-	Vector2f t44(437,260);
-	Vector2f t45(454,197);
-	//G13
-	Vector2f t46(541,251);
-	Vector2f t47(437,260);
-	Vector2f t48(596,182);
-
-	//G14
-	Vector2f t49(454,197);
-	Vector2f t50(235,167);
-	Vector2f t51(456,170);
 
 	//Layer 4 - trees
 
@@ -284,55 +223,19 @@ int main(void) {
 
 	//Bottom Rock Shade
 
-	//shade1
-	Vector2f s1(200,250);
-	Vector2f s2(440,250);
-	Vector2f s3(320,350);
-	//shade2
-	Vector2f s4(320,350);
-	Vector2f s5(440,250);
-	Vector2f s6(320,450);
-	//shade3
-	Vector2f s7(200,250);
-	Vector2f s8(320,450);
-	Vector2f s9(320,350);
 
 
 
 
 
-
-
-
-	//Layer 1
-	SDL_SetRenderDrawColor(renderer, 105, 105, 105, 255); //dim grey
-	DrawFilledTriangle tri1(renderer, t1, t2, t3 );
-	tri1.draw();	
-
-	DrawFilledTriangle tri2(renderer, t7, t8, t9 );
-	tri2.draw();	
-
-	SDL_SetRenderDrawColor(renderer, 169, 169, 169, 255); //dark grey
-	DrawFilledTriangle tri3(renderer, t4, t5, t6 );
-	tri3.draw();	
+	DrawBase(renderer);
 
 	SDL_RenderPresent(renderer);
 
-	//Bottom Rock Shade
-	DrawFilledTriangle shad1(renderer, s1, s2, s3 );
-	SDL_SetRenderDrawColor(renderer, 169, 169, 169, 255); //dark grey
-	shad1.draw();	
-
-	SDL_SetRenderDrawColor(renderer, 192, 192, 192, 255); //silver
-	DrawFilledTriangle shad2(renderer, s4, s5, s6 );
-	shad2.draw();	
-
-	SDL_SetRenderDrawColor(renderer, 128, 128, 128, 255); //grey
-	DrawFilledTriangle shad3(renderer, s7, s8, s9 );
-	shad3.draw();	
-
+	DrawGrass(renderer);
 
 	SDL_RenderPresent(renderer);
+/*
 
 	//Cloud 1
 	SDL_Color color1 = {245,245,245,255};
@@ -560,7 +463,7 @@ int main(void) {
 	std::cout << semi1;
 	std::cout << semi2;
 
-
+*/
 
 	//***************************************************************************//
 	writeName(renderer);
@@ -595,4 +498,175 @@ int main(void) {
 		  std::cout << "Oops, someone threw an exception!" << std::endl;
   }
   return EXIT_SUCCESS;
+}
+
+
+void DrawBase(SDL_Renderer* renderer)
+{
+
+	//Layer 1 - Black Base
+	//left base
+	Vector2f t0(100,250);
+	Vector2f t1(300,250);
+	Vector2f t2(200,380);
+
+	//center base
+	Vector2f t3(200,250);
+	Vector2f t4(440,250);
+	Vector2f t5(320,450);
+
+	//Right base
+	Vector2f t6(340,250);
+	Vector2f t7(540,250);
+	Vector2f t8(440,420);
+
+	//shade1
+	Vector2f s1(200,250);
+	Vector2f s2(440,250);
+	Vector2f s3(320,350);
+	//shade2
+	Vector2f s4(320,350);
+	Vector2f s5(440,250);
+	Vector2f s6(320,450);
+	//shade3
+	Vector2f s7(200,250);
+	Vector2f s8(320,450);
+	Vector2f s9(320,350);
+
+
+	DrawFilledTriangle triangle1(renderer, t0, t1, t2, dimGrey);
+	triangle1.draw(); //left	
+	
+	DrawFilledTriangle triangle3(renderer, t6, t7, t8, dimGrey);
+	triangle3.draw();	//right
+	
+	DrawFilledTriangle triangle2(renderer, t3, t4, t5, darkGrey);
+	triangle2.draw(); // center
+
+	DrawFilledTriangle triangle4(renderer, s1, s2, s3, darkGrey);
+	triangle4.draw();	//center-s1
+	
+	DrawFilledTriangle triangle5(renderer, s4, s5, s6, silverGrey);
+	triangle5.draw();	//center-s2
+
+	DrawFilledTriangle triangle6(renderer, s7, s8, s9, grey);
+	triangle6.draw();	//center-s3
+	
+}
+
+void DrawGrass(SDL_Renderer* renderer)
+{
+	//Layer2 - Green Base
+	//G1
+	Vector2f t10(72,214);
+	Vector2f t11(119,283);
+	Vector2f t12(200,250);
+
+	//G2
+	Vector2f t13(72,214);
+	Vector2f t14(235,180);
+	Vector2f t15(200,250);
+
+	//G3
+	Vector2f t16(440,180);
+	Vector2f t17(235,180);
+	Vector2f t18(200,250);
+
+	//G4
+	Vector2f t19(440,180);
+	Vector2f t20(596,185);
+	Vector2f t21(401,251);
+
+	//G5
+	Vector2f t22(200,250);
+	Vector2f t23(440,180);
+	Vector2f t24(401,251);
+
+	//G6
+	Vector2f t25(596,185);
+	Vector2f t26(541,251);
+	Vector2f t27(401,251);
+
+	//Layer 3 - green shade
+
+	//G7
+	Vector2f t28(127,266);
+	Vector2f t29(200,251);
+	Vector2f t30(72,214);
+	//G8
+	Vector2f t31(127,266);
+	Vector2f t32(119,283);
+	Vector2f t33(200,251);
+	//G9
+	Vector2f t34(127,266);
+	Vector2f t35(119,283);
+	Vector2f t36(72,214);
+
+	//G10
+	Vector2f t37(200,251);
+	Vector2f t38(368,221);
+	Vector2f t39(437,260);
+	//G11
+	Vector2f t40(368,221);
+	Vector2f t41(437,260);
+	Vector2f t42(454,197);
+	//G12
+	Vector2f t43(596,182);
+	Vector2f t44(437,260);
+	Vector2f t45(454,197);
+	//G13
+	Vector2f t46(541,251);
+	Vector2f t47(437,260);
+	Vector2f t48(596,182);
+
+	//G14
+	Vector2f t49(454,197);
+	Vector2f t50(235,180);
+	Vector2f t51(456,180);
+
+	//Layer2
+
+	DrawFilledTriangle tri4(renderer, t10, t11, t12, green);
+	tri4.draw();	
+
+	DrawFilledTriangle tri5(renderer, t13, t14, t15, green );
+	tri5.draw();	
+
+	DrawFilledTriangle tri6(renderer, t16, t17, t18, yellowGreen );
+	tri6.draw();	
+
+	DrawFilledTriangle tri7(renderer, t19, t20, t21, yellowGreen );
+	tri7.draw();	
+
+	DrawFilledTriangle tri8(renderer, t22, t23, t24, yellowGreen);
+	tri8.draw();	
+
+	DrawFilledTriangle tri9(renderer, t25, t26, t27, yellowGreen);
+	tri9.draw();
+
+	SDL_RenderPresent(renderer);
+
+	//Layer 3 - shade
+
+	DrawFilledTriangle tri10(renderer, t31, t32, t33, forestGreen );
+	tri10.draw();	
+
+	DrawFilledTriangle tri11(renderer, t34, t35, t36, limeGreen );
+	tri11.draw();
+
+	DrawFilledTriangle tri12(renderer, t37, t38, t39, darkGreen );
+	tri12.draw();
+
+	DrawFilledTriangle tri13(renderer, t40, t41, t42, green );
+	tri13.draw();
+
+	DrawFilledTriangle tri14(renderer, t43, t44, t45,slDarkGreen );
+	tri14.draw();
+
+	DrawFilledTriangle tri15(renderer, t46, t47, t48, darkGreen );
+	tri15.draw();
+
+	DrawFilledTriangle tri16(renderer, t49, t50, t51, limeGreen );
+	tri16.draw();
+
 }
