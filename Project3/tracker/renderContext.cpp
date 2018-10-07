@@ -4,6 +4,8 @@
 RenderContext::RenderContext() : 
   window(nullptr), 
   renderer(nullptr),
+  //factory( ImageFactory::getInstance() )
+  //GOF TO mayer
   factory( ImageFactory::getInstance() )
 {
 	if( SDL_Init( SDL_INIT_VIDEO ) < 0 ) {
@@ -14,15 +16,21 @@ RenderContext::RenderContext() :
 }
 
 RenderContext::~RenderContext() {
-  delete ImageFactory::getInstance();
+  //GOF TO mayer
+  //delete ImageFactory::getInstance();
   SDL_DestroyRenderer(renderer);
   SDL_DestroyWindow( window );
   SDL_Quit();
 }
 
-RenderContext* RenderContext::getInstance() {
-  if ( instance ) return instance;
-  instance = new RenderContext;
+  //GOF TO mayer
+//RenderContext* RenderContext::getInstance() {
+//  if ( instance ) return instance;
+//  instance = new RenderContext;
+//  return instance;
+//}
+RenderContext& RenderContext::getInstance() {
+  static RenderContext instance;
   return instance;
 }
 

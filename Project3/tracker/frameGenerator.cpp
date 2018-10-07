@@ -7,8 +7,10 @@
 #include "renderContext.h"
 
 FrameGenerator::FrameGenerator() : 
-  rend(RenderContext::getInstance()->getRenderer()), 
-  window(RenderContext::getInstance()->getWindow()), 
+  //rend(RenderContext::getInstance()->getRenderer()), 
+  //window(RenderContext::getInstance()->getWindow()), 
+  rend(RenderContext::getInstance().getRenderer()), 
+  window(RenderContext::getInstance().getWindow()), 
   WIDTH( Gamedata::getInstance().getXmlInt("view/width") ),
   HEIGHT( Gamedata::getInstance().getXmlInt("view/height") ),
   USERNAME( Gamedata::getInstance().getXmlStr("username") ),

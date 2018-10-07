@@ -5,7 +5,8 @@
 #include "renderContext.h"
 
 Image::Image( SDL_Surface* surf) : 
-  renderer(RenderContext::getInstance()->getRenderer()),
+//REplacing arrow in  renderer(RenderContext::getInstance()->getRenderer()),
+  renderer(RenderContext::getInstance().getRenderer()),
   surface( surf ),
   texture( nullptr ),
   view{0,0,surf->w,surf->h}
@@ -30,8 +31,10 @@ Image& Image::operator=(const Image& rhs) {
 
 void Image::regenerateTexture(){
   if(texture != nullptr) SDL_DestroyTexture(texture);
-  RenderContext* renderContext  = RenderContext::getInstance();
-  texture = SDL_CreateTextureFromSurface(renderContext->getRenderer(), surface);
+  //RenderContext* renderContext  = RenderContext::getInstance();
+  RenderContext& renderContext  = RenderContext::getInstance();
+  //texture = SDL_CreateTextureFromSurface(renderContext->getRenderer(), surface);
+  texture = SDL_CreateTextureFromSurface(renderContext.getRenderer(), surface);
 }
 
 void Image::draw(int x, int y) const {

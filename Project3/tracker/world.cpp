@@ -2,8 +2,9 @@
 #include "world.h"
 #include "imageFactory.h"
 
+//Replacing arrow in  image( ImageFactory::getInstance()->getImage(name) ),
 World::World(const std::string& name, int fact) : 
-  image( ImageFactory::getInstance()->getImage(name) ),
+  image( ImageFactory::getInstance().getImage(name) ),
   factor(fact),
     worldWidth( Gamedata::getInstance().getXmlInt("world/width") ),
     imageWidth( image->getWidth() ),

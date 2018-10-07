@@ -4,17 +4,22 @@
 
 class RenderContext{
 public:
-  static RenderContext* getInstance();
+  //GOF TO mayer
+  //static RenderContext* getInstance();
+  static RenderContext& getInstance();
   ~RenderContext();
   SDL_Window* getWindow() const { return window; }
   SDL_Renderer* getRenderer() const { return renderer; }
 
 private:
-  static RenderContext* instance;
+  //GOF TO mayer
+  //static RenderContext& instance;
   SDL_Window* window;
   SDL_Renderer* renderer;
 
-  ImageFactory* factory;
+  //GOF TO mayer
+  //ImageFactory* factory;
+  ImageFactory& factory;
 
   SDL_Window* initWindow();
   SDL_Renderer* initRenderer();

@@ -13,9 +13,10 @@ IoMod::~IoMod() {
   TTF_Quit(); 
 }
 
+//replacing arrow in getInstance()->getRenderer() to .
 IoMod::IoMod() : 
   init(TTF_Init()),
-  renderer( RenderContext::getInstance()->getRenderer() ),
+  renderer( RenderContext::getInstance().getRenderer() ),
   font(TTF_OpenFont(Gamedata::getInstance().getXmlStr("font/file").c_str(),
                     Gamedata::getInstance().getXmlInt("font/size"))),
   textColor({0xff, 0, 0, 0})
