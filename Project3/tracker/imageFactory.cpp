@@ -10,12 +10,34 @@ ImageFactory* ImageFactory::getInstance() {
 ImageFactory::~ImageFactory() {
   std::cout << "Deleting images in Factory" << std::endl;
   // Free single image containers
-  for(auto& si : surfaces) SDL_FreeSurface(si.second);
-  for(auto& ti : textures) SDL_DestroyTexture(ti.second);
-  for(auto& fi : images  ) {
-    std::cout << "deleting " << fi.first << std::endl;
-    delete fi.second;
-  }
+//  for(auto& si : surfaces) SDL_FreeSurface(si.second);
+//  for(auto& ti : textures) SDL_DestroyTexture(ti.second);
+//  for(auto& fi : images  ) {
+//    std::cout << "deleting " << fi.first << std::endl;
+//    delete fi.second;
+//  }
+
+	//Replacing ranged for loops with while loops
+	std::map<std::string, SDL_Surface*>::const_iterator si = surfaces.begin();
+	while(si != surfaces.end())
+	{
+		SDL_FreeSurface(si->second);
+		si++;
+	}
+
+	std::map<std::string, SDL_Texture*>::const_iterator ti = textures.begin();
+	while(ti != textures.end())
+	{
+		SDL_DestroyTexture(ti->second);
+		ti++;
+	}
+
+	std::map<std::string, Image*>::const_iterator fi = images.begin();
+	while(fi != images.end())
+	{
+    	std::cout << "deleting " << fi->first << std::endl;
+    	delete fi->second;
+	}
 
   // Free multi-image containers
   for ( auto& surfaces : multiSurfaces ) {
