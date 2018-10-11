@@ -1,6 +1,7 @@
 #include <sstream>
 #include "viewport.h"
 #include "ioMod.h"
+#include "clock.h"
 
 Viewport& Viewport::getInstance() {
   static Viewport viewport;
@@ -13,12 +14,21 @@ Viewport::Viewport() :
   msgPos(
     Vector2f( gdata.getXmlInt("view/loc/x"), gdata.getXmlInt("view/loc/y") )
   ),
+  //FPS
+  msgFPSPos(
+    Vector2f( gdata.getXmlInt("viewFPS/loc/x"), gdata.getXmlInt("viewFPS/loc/y") )
+  ),
+  //name
+  namePos(
+    Vector2f( gdata.getXmlInt("name/loc/x"), gdata.getXmlInt("name/loc/y") )
+  ),
   worldWidth(gdata.getXmlInt("world/width")),
   worldHeight(gdata.getXmlInt("world/height")),
   viewWidth(gdata.getXmlInt("view/width")), 
   viewHeight(gdata.getXmlInt("view/height")),
   objWidth(0), objHeight(0),
-  objectToTrack(NULL) 
+  colour({0, 0, 0xff, 0}),
+  objectToTrack(NULL)
 {}
 
 void Viewport::setObjectToTrack(const Drawable *obj) { 
@@ -29,7 +39,18 @@ void Viewport::setObjectToTrack(const Drawable *obj) {
 
 void Viewport::draw() const {
   IoMod::getInstance().
-    writeText("Tracking: "+objectToTrack->getName(), msgPos[0], msgPos[1]);
+    writeText("Tracking: "+objectToTrack->getName(), msgPos[0], msgPos[1], colour);
+  //Printing FPS
+  std::ostringstream fpsString;
+  fpsString << "FPS: " << Clock::getInstance().getFps() << std::endl ;
+
+  IoMod::getInstance().
+    writeText(fpsString.str(), msgFPSPos[0], msgFPSPos[1], colour);
+	
+  //Printing Name
+  IoMod::getInstance().
+    writeText("Vivek Koodli Udupa", namePos[0], namePos[1], colour);
+
 }
 
 void Viewport::update() {

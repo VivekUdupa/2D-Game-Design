@@ -19,7 +19,8 @@ IoMod::IoMod() :
   renderer( RenderContext::getInstance().getRenderer() ),
   font(TTF_OpenFont(Gamedata::getInstance().getXmlStr("font/file").c_str(),
                     Gamedata::getInstance().getXmlInt("font/size"))),
-  textColor({0xff, 0, 0, 0})
+  textColor({0xff, 0, 0, 0}),
+  colour({0, 0, 0xff, 0})
 {
   if ( init == -1 ) {
     throw std::string("error: Couldn't init font");
@@ -52,6 +53,29 @@ SDL_Surface* IoMod::readSurface(const std::string& filename) {
 void IoMod::writeText(const std::string& msg, int x, int y) const {
   SDL_Surface* surface = 
     TTF_RenderText_Solid(font, msg.c_str(), textColor);
+
+  SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
+
+  int textWidth = surface->w;
+  int textHeight = surface->h;
+  SDL_FreeSurface(surface);
+  SDL_Rect dst = {x, y, textWidth, textHeight};
+
+  SDL_RenderCopy(renderer, texture, NULL, &dst);
+  SDL_DestroyTexture(texture);
+}
+
+//Overloading to include font color
+void IoMod::writeText(const std::string& msg, int x, int y, SDL_Color colour) const {
+  
+  //Set Color
+  colour.r = Gamedata::getInstance().getXmlInt("font/red");
+  colour.g = Gamedata::getInstance().getXmlInt("font/green");
+  colour.b = Gamedata::getInstance().getXmlInt("font/blue");
+  colour.a = Gamedata::getInstance().getXmlInt("font/alpha");
+  
+  SDL_Surface* surface = 
+    TTF_RenderText_Solid(font, msg.c_str(), colour);
 
   SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
 

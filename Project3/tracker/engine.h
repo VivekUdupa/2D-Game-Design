@@ -17,7 +17,7 @@ private:
   //const RenderContext* rc;
   const RenderContext& rc;
   const IoMod& io;
-  Clock& clock;
+  Clock& clock ;
 
   SDL_Renderer * const renderer;
   World world;

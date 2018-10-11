@@ -2,20 +2,32 @@
 <GameData>
 <!-- screenTitle is also used to identify you and your animation. 
      So make sure to include your name as part of the screenTitle -->
-<title>The Tracker Framework</title>
+<title>Vivek Udupa's Tracker Framework</title>
 <maxStringSize>50</maxStringSize>
 
 <frameCapOn>true</frameCapOn>
 <period>17</period>
 
 <maxFrames>300</maxFrames>
-<username>malloy</username>
+<username>vkoodli</username>
 
 <view>
   <width>854</width>
   <height>480</height>
   <loc x="30" y="30"/>
 </view>
+
+<viewFPS>
+  <width>854</width>
+  <height>480</height>
+  <loc x="30" y="60"/>
+</viewFPS>
+
+<name>
+  <width>854</width>
+  <height>480</height>
+  <loc x="30" y="400"/>
+</name>
 
 <world>
   <width>2000</width>
@@ -31,7 +43,7 @@
 <font name="font">
   <file>fonts/arial.ttf</file>
   <size>24</size>
-  <red>255</red>
+  <red>0</red>
   <green>255</green>
   <blue>0</blue>
   <alpha>0</alpha>
