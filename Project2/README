@@ -14,3 +14,5 @@ The easiest part of this project: Drawing the shapes by using their respective c
 
 Problems that I had in completing this project: 1) I was not able to use the alpha channel to control the opacity. The renders were alwasy opaque irrespective of the alpha-channel value. 
 												2) I was unable to initialize the co-ordinates in a 2D array.
+												
+//adding this line just to make a fresh git commit
