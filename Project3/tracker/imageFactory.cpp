@@ -43,6 +43,7 @@ ImageFactory::~ImageFactory() {
 	{
     	std::cout << "deleting " << fi->first << std::endl;
     	delete fi->second;
+		fi++;
 	}
 
   // Free multi-image containers
