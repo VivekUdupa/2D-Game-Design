@@ -19,6 +19,7 @@ OBJS = \
 	sprite.o \
 	multisprite.o \
 	flyingSaucer.o \
+	rocket.o\
 	vector2f.o \
 	clock.o \
 	engine.o \

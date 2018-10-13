@@ -69,6 +69,20 @@
   <transparency>true</transparency>
 </flyingSaucer>
 
+<rocket>
+  <file>assets/rocket.png</file>
+  <startLoc x="50" y="100"/>
+  <frames>4</frames>
+  <rightframes>2</rightframes>
+  <leftframes>2</leftframes>
+  <frameInterval>50</frameInterval>
+  <imageWidth>250</imageWidth>
+  <imageHeight>250</imageHeight>
+  <speedX>700</speedX>
+  <speedY>0</speedY>
+  <transparency>true</transparency>
+</rocket>
+
 <YellowStar>
   <file>assets/yellowstar32.png</file>
   <startLoc x="227" y="240"/>

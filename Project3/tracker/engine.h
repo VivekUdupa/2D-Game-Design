@@ -26,6 +26,7 @@ private:
   Drawable* star;
   Drawable* astronaut;
   Drawable* flyingSaucer;
+  Drawable* rocket;
   int currentSprite;
 
   bool makeVideo;

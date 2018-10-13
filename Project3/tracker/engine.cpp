@@ -7,6 +7,7 @@
 #include "sprite.h"
 #include "multisprite.h"
 #include "flyingSaucer.h"
+#include "rocket.h"
 #include "gameData.h"
 #include "engine.h"
 #include "frameGenerator.h"
@@ -29,6 +30,7 @@ Engine::Engine() :
   star(new Sprite("YellowStar")),
   astronaut(new MultiSprite("astronaut")),
   flyingSaucer(new FlyingSaucer("flyingSaucer")),
+  rocket(new Rocket("rocket")),
   currentSprite(0),
   makeVideo( false )
 {
@@ -43,6 +45,7 @@ void Engine::draw() const {
   star->draw();
   astronaut->draw();
   flyingSaucer->draw();
+  rocket->draw();
 
   viewport.draw();
   SDL_RenderPresent(renderer);
@@ -52,18 +55,22 @@ void Engine::update(Uint32 ticks) {
   star->update(ticks);
   astronaut->update(ticks);
   flyingSaucer->update(ticks);
+  rocket->update(ticks);
   world.update();
   viewport.update(); // always update viewport last
 }
 
 void Engine::switchSprite(){
   ++currentSprite;
-  currentSprite = currentSprite % 3;
+  currentSprite = currentSprite % 4;
   if ( currentSprite == 1) {
     Viewport::getInstance().setObjectToTrack(astronaut);
   }
   else if(currentSprite == 2) {
     Viewport::getInstance().setObjectToTrack(star);
+  }
+  else if(currentSprite == 3) {
+    Viewport::getInstance().setObjectToTrack(rocket);
   }
   else {
     Viewport::getInstance().setObjectToTrack(flyingSaucer);
