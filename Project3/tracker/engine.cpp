@@ -26,6 +26,8 @@ Engine::Engine() :
   //renderer( rc->getRenderer() ),
   renderer( rc.getRenderer() ),
   world("back", Gamedata::getInstance().getXmlInt("back/factor") ),
+  planetsBig("planetsBig", Gamedata::getInstance().getXmlInt("planetsBig/factor") ),
+  planetsSmall("planetsSmall", Gamedata::getInstance().getXmlInt("planetsSmall/factor") ),
   viewport( Viewport::getInstance() ),
   star(new Sprite("YellowStar")),
   astronaut(new MultiSprite("astronaut")),
@@ -41,6 +43,8 @@ Engine::Engine() :
 
 void Engine::draw() const {
   world.draw();
+  planetsBig.draw();
+  planetsSmall.draw();
 
   star->draw();
   astronaut->draw();
@@ -57,6 +61,8 @@ void Engine::update(Uint32 ticks) {
   flyingSaucer->update(ticks);
   rocket->update(ticks);
   world.update();
+  planetsBig.update();
+  planetsSmall.update();
   viewport.update(); // always update viewport last
 }
 

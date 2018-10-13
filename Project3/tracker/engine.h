@@ -21,6 +21,8 @@ private:
 
   SDL_Renderer * const renderer;
   World world;
+  World planetsBig;
+  World planetsSmall;
   Viewport& viewport;
 
   Drawable* star;

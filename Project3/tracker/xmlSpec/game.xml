@@ -30,15 +30,30 @@
 </name>
 
 <world>
-  <width>2000</width>
-  <height>800</height>
+  <!-- <width>2000</width> 
+  <height>800</height> -->
+  <width>3900</width>
+  <height>1000</height>
 </world>
 
 <back>
-  <file>assets/bigstarrysky.png</file>
-  <factor>1</factor>
+  <!-- <file>assets/bigstarrysky.png</file> -->
+  <file>assets/spaceBG.png</file>
+  <factor>3</factor>
   <transparency>false</transparency>
 </back>
+
+<planetsBig>
+  <file>assets/planetsBig.png</file>
+  <factor>2</factor>
+  <transparency>false</transparency>
+</planetsBig>
+
+<planetsSmall>
+  <file>assets/planetsSmall.png</file>
+  <factor>1</factor>
+  <transparency>false</transparency>
+</planetsSmall>
 
 <font name="font">
   <file>fonts/arial.ttf</file>
