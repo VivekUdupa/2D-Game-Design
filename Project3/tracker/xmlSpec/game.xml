@@ -45,19 +45,29 @@
   <size>24</size>
   <red>0</red>
   <green>255</green>
-  <blue>0</blue>
+  <blue>255</blue>
   <alpha>0</alpha>
 </font>
 
-<SpinningStar>
-  <file>assets/stars.png</file>
+<astronaut>
+  <file>assets/astronaut.png</file>
   <startLoc x="50" y="140"/>
-  <frames>4</frames>
-  <frameInterval>500</frameInterval>
+  <frames>24</frames>
+  <frameInterval>100</frameInterval>
+  <speedX>150</speedX>
+  <speedY>150</speedY>
+  <transparency>true</transparency>
+</astronaut>
+
+<flyingSaucer>
+  <file>assets/flyingSaucer.png</file>
+  <startLoc x="50" y="240"/>
+  <frames>2</frames>
+  <frameInterval>50</frameInterval>
   <speedX>200</speedX>
   <speedY>200</speedY>
   <transparency>true</transparency>
-</SpinningStar>
+</flyingSaucer>
 
 <YellowStar>
   <file>assets/yellowstar32.png</file>

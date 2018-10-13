@@ -6,13 +6,15 @@
 #include <iomanip>
 #include "sprite.h"
 #include "multisprite.h"
+#include "flyingSaucer.h"
 #include "gameData.h"
 #include "engine.h"
 #include "frameGenerator.h"
 
 Engine::~Engine() { 
   delete star;
-  delete spinningStar;
+  delete astronaut;
+  delete flyingSaucer;
   std::cout << "Terminating program" << std::endl;
 }
 
@@ -25,11 +27,12 @@ Engine::Engine() :
   world("back", Gamedata::getInstance().getXmlInt("back/factor") ),
   viewport( Viewport::getInstance() ),
   star(new Sprite("YellowStar")),
-  spinningStar(new MultiSprite("SpinningStar")),
+  astronaut(new MultiSprite("astronaut")),
+  flyingSaucer(new FlyingSaucer("flyingSaucer")),
   currentSprite(0),
   makeVideo( false )
 {
-  
+  astronaut->setScale(0.5);  
   Viewport::getInstance().setObjectToTrack(star);
   std::cout << "Loading complete" << std::endl;
 }
@@ -38,7 +41,8 @@ void Engine::draw() const {
   world.draw();
 
   star->draw();
-  spinningStar->draw();
+  astronaut->draw();
+  flyingSaucer->draw();
 
   viewport.draw();
   SDL_RenderPresent(renderer);
@@ -46,19 +50,23 @@ void Engine::draw() const {
 
 void Engine::update(Uint32 ticks) {
   star->update(ticks);
-  spinningStar->update(ticks);
+  astronaut->update(ticks);
+  flyingSaucer->update(ticks);
   world.update();
   viewport.update(); // always update viewport last
 }
 
 void Engine::switchSprite(){
   ++currentSprite;
-  currentSprite = currentSprite % 2;
-  if ( currentSprite ) {
-    Viewport::getInstance().setObjectToTrack(spinningStar);
+  currentSprite = currentSprite % 3;
+  if ( currentSprite == 1) {
+    Viewport::getInstance().setObjectToTrack(astronaut);
+  }
+  else if(currentSprite == 2) {
+    Viewport::getInstance().setObjectToTrack(star);
   }
   else {
-    Viewport::getInstance().setObjectToTrack(star);
+    Viewport::getInstance().setObjectToTrack(flyingSaucer);
   }
 }
 

@@ -24,7 +24,8 @@ private:
   Viewport& viewport;
 
   Drawable* star;
-  Drawable* spinningStar;
+  Drawable* astronaut;
+  Drawable* flyingSaucer;
   int currentSprite;
 
   bool makeVideo;
