@@ -38,7 +38,7 @@ Engine::Engine() :
   makeVideo( false )
 {
   astronaut->setScale(0.5);  
-  Viewport::getInstance().setObjectToTrack(astronaut);
+  Viewport::getInstance().setObjectToTrack(rocket);
   std::cout << "Loading complete" << std::endl;
 }
 
@@ -47,7 +47,7 @@ void Engine::draw() const {
   planetsBig.draw();
   planetsSmall.draw();
 
-  star->draw();
+ // star->draw();
   astronaut->draw();
   flyingSaucer->draw();
   rocket->draw();
@@ -57,7 +57,7 @@ void Engine::draw() const {
 }
 
 void Engine::update(Uint32 ticks) {
-  star->update(ticks);
+  //star->update(ticks);
   astronaut->update(ticks);
   flyingSaucer->update(ticks);
   rocket->update(ticks);
@@ -69,18 +69,15 @@ void Engine::update(Uint32 ticks) {
 
 void Engine::switchSprite(){
   ++currentSprite;
-  currentSprite = currentSprite % 4;
+  currentSprite = currentSprite % 3;
   if ( currentSprite == 1) {
     Viewport::getInstance().setObjectToTrack(astronaut);
   }
   else if(currentSprite == 2) {
-    Viewport::getInstance().setObjectToTrack(star);
-  }
-  else if(currentSprite == 3) {
-    Viewport::getInstance().setObjectToTrack(rocket);
+    Viewport::getInstance().setObjectToTrack(flyingSaucer);
   }
   else {
-    Viewport::getInstance().setObjectToTrack(flyingSaucer);
+    Viewport::getInstance().setObjectToTrack(rocket);
   }
 }
 

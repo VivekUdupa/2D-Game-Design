@@ -8,7 +8,7 @@
 <frameCapOn>true</frameCapOn>
 <period>17</period>
 
-<maxFrames>300</maxFrames>
+<maxFrames>3000000000</maxFrames>
 <username>vkoodli</username>
 
 <view>
@@ -26,7 +26,7 @@
 <name>
   <width>854</width>
   <height>480</height>
-  <loc x="30" y="400"/>
+  <loc x="30" y="440"/>
 </name>
 
 <world>
@@ -58,9 +58,9 @@
 <font name="font">
   <file>fonts/arial.ttf</file>
   <size>24</size>
-  <red>255</red>
-  <green>0</green>
-  <blue>0</blue>
+  <red>10</red>
+  <green>250</green>
+  <blue>50</blue>
   <alpha>0</alpha>
 </font>
 
@@ -86,14 +86,14 @@
 
 <rocket>
   <file>assets/rocket.png</file>
-  <startLoc x="50" y="100"/>
+  <startLoc x="100" y="300"/>
   <frames>6</frames>
   <rightframes>3</rightframes>
   <leftframes>3</leftframes>
   <frameInterval>50</frameInterval>
   <imageWidth>250</imageWidth>
   <imageHeight>150</imageHeight>
-  <speedX>700</speedX>
+  <speedX>750</speedX>
   <speedY>0</speedY>
   <transparency>true</transparency>
 </rocket>
