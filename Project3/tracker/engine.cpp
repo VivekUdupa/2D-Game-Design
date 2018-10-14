@@ -16,6 +16,7 @@ Engine::~Engine() {
   delete star;
   delete astronaut;
   delete flyingSaucer;
+  delete rocket;
   std::cout << "Terminating program" << std::endl;
 }
 
@@ -37,7 +38,7 @@ Engine::Engine() :
   makeVideo( false )
 {
   astronaut->setScale(0.5);  
-  Viewport::getInstance().setObjectToTrack(star);
+  Viewport::getInstance().setObjectToTrack(astronaut);
   std::cout << "Loading complete" << std::endl;
 }
 
