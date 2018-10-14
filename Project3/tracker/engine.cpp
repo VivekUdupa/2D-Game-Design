@@ -21,11 +21,16 @@ Engine::~Engine() {
 }
 
 Engine::Engine() :
+  gdata(Gamedata::getInstance()),
   rc( RenderContext::getInstance() ),
   io( IoMod::getInstance() ),
   clock( Clock::getInstance() ),
   //renderer( rc->getRenderer() ),
   renderer( rc.getRenderer() ),
+  //FPS
+  msgFPSPos(
+    Vector2f( gdata.getXmlInt("viewFPS/loc/x"), gdata.getXmlInt("viewFPS/loc/y") )
+  ),
   world("back", Gamedata::getInstance().getXmlInt("back/factor") ),
   planetsBig("planetsBig", Gamedata::getInstance().getXmlInt("planetsBig/factor") ),
   planetsSmall("planetsSmall", Gamedata::getInstance().getXmlInt("planetsSmall/factor") ),
@@ -35,6 +40,7 @@ Engine::Engine() :
   flyingSaucer(new FlyingSaucer("flyingSaucer")),
   rocket(new Rocket("rocket")),
   currentSprite(0),
+  colour({0, 0, 0xff, 0}),
   makeVideo( false )
 {
   astronaut->setScale(0.5);  
@@ -52,6 +58,13 @@ void Engine::draw() const {
   flyingSaucer->draw();
   rocket->draw();
 
+	
+  //Printing FPS
+  std::ostringstream fpsString;
+  fpsString << "FPS: " << Clock::getInstance().getFps() << std::endl ;
+
+  IoMod::getInstance().
+    writeText(fpsString.str(), msgFPSPos[0], msgFPSPos[1], colour);
   viewport.draw();
   SDL_RenderPresent(renderer);
 }

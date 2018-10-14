@@ -10,7 +10,6 @@ public:
 
 private:
   friend class Engine;
-  friend class Viewport;
 
   bool started;
   bool paused;

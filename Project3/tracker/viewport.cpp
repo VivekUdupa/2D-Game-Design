@@ -14,10 +14,6 @@ Viewport::Viewport() :
   msgPos(
     Vector2f( gdata.getXmlInt("view/loc/x"), gdata.getXmlInt("view/loc/y") )
   ),
-  //FPS
-  msgFPSPos(
-    Vector2f( gdata.getXmlInt("viewFPS/loc/x"), gdata.getXmlInt("viewFPS/loc/y") )
-  ),
   //name
   namePos(
     Vector2f( gdata.getXmlInt("name/loc/x"), gdata.getXmlInt("name/loc/y") )
@@ -40,13 +36,6 @@ void Viewport::setObjectToTrack(const Drawable *obj) {
 void Viewport::draw() const {
   IoMod::getInstance().
     writeText("Tracking: "+objectToTrack->getName(), msgPos[0], msgPos[1], colour);
-  //Printing FPS
-  std::ostringstream fpsString;
-  fpsString << "FPS: " << Clock::getInstance().getFps() << std::endl ;
-
-  IoMod::getInstance().
-    writeText(fpsString.str(), msgFPSPos[0], msgFPSPos[1], colour);
-	
   //Printing Name
   IoMod::getInstance().
     writeText("Vivek Koodli Udupa", namePos[0], namePos[1], colour);

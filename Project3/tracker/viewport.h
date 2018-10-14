@@ -22,7 +22,7 @@ private:
   const Gamedata& gdata;
   Vector2f viewPos;
   Vector2f msgPos;
-  Vector2f msgFPSPos;
+ // Vector2f msgFPSPos;
   Vector2f namePos;
   int worldWidth;
   int worldHeight;
