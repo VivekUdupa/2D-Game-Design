@@ -78,7 +78,7 @@
   <file>assets/flyingSaucer.png</file>
   <startLoc x="50" y="240"/>
   <frames>2</frames>
-  <frameInterval>50</frameInterval>
+  <frameInterval>100</frameInterval>
   <speedX>200</speedX>
   <speedY>200</speedY>
   <transparency>true</transparency>
@@ -90,7 +90,7 @@
   <frames>6</frames>
   <rightframes>3</rightframes>
   <leftframes>3</leftframes>
-  <frameInterval>50</frameInterval>
+  <frameInterval>150</frameInterval>
   <imageWidth>250</imageWidth>
   <imageHeight>150</imageHeight>
   <speedX>750</speedX>
