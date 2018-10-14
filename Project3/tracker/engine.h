@@ -41,8 +41,8 @@ private:
   void draw() const;
   void update(Uint32);
 
-  Engine(const Engine&);
-  Engine& operator=(const Engine&);
+  Engine(const Engine&) = delete;
+  Engine& operator=(const Engine&) = delete;
   void printScales() const;
   void checkForCollisions();
 };
