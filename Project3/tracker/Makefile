@@ -16,6 +16,7 @@ OBJS = \
 	image.o \
 	imageFactory.o \
 	frameGenerator.o \
+	collisionStrategy.o \
 	sprite.o \
 	multisprite.o \
 	flyingSaucer.o \

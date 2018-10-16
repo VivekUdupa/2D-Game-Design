@@ -71,7 +71,7 @@
   <frameInterval>100</frameInterval>
   <speedX>150</speedX>
   <speedY>150</speedY>
-  <transparency>true</transparency>
+  <transparency>false</transparency>
 </astronaut>
 
 <flyingSaucer>
@@ -95,7 +95,7 @@
   <imageHeight>150</imageHeight>
   <speedX>750</speedX>
   <speedY>0</speedY>
-  <transparency>true</transparency>
+  <transparency>false</transparency>
 </rocket>
 
 <YellowStar>
