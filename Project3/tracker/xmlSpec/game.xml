@@ -68,9 +68,9 @@
   <file>assets/astronaut.png</file>
   <startLoc x="50" y="140"/>
   <frames>24</frames>
-  <frameInterval>100</frameInterval>
-  <speedX>150</speedX>
-  <speedY>150</speedY>
+  <frameInterval>7</frameInterval>
+  <speedX>550</speedX>
+  <speedY>550</speedY>
   <transparency>false</transparency>
 </astronaut>
 
