@@ -16,7 +16,7 @@ Engine::~Engine() {
   delete star;
   delete astronaut;
   delete flyingSaucer;
-  delete rocket;
+  delete knightWalk;
   std::cout << "Terminating program" << std::endl;
 }
 
@@ -42,13 +42,14 @@ Engine::Engine() :
   star(new Sprite("YellowStar")),
   astronaut(new MultiSprite("astronaut")),
   flyingSaucer(new FlyingSaucer("flyingSaucer")),
-  rocket(new Rocket("rocket")),
+  knightWalk(new Rocket("knightWalk")),
   currentSprite(0),
   colour({0, 0, 0xff, 0}),
   makeVideo( false )
 {
   astronaut->setScale(0.5);  
-  Viewport::getInstance().setObjectToTrack(rocket);
+  knightWalk->setScale(0.15);  
+  Viewport::getInstance().setObjectToTrack(knightWalk);
   std::cout << "Loading complete" << std::endl;
 }
 
@@ -67,7 +68,7 @@ void Engine::draw() const {
  // star->draw();
   astronaut->draw();
   flyingSaucer->draw();
-  rocket->draw();
+  knightWalk->draw();
 
 	
   //Printing FPS
@@ -84,7 +85,7 @@ void Engine::update(Uint32 ticks) {
   //star->update(ticks);
   astronaut->update(ticks);
   flyingSaucer->update(ticks);
-  rocket->update(ticks);
+  knightWalk->update(ticks);
   greenSky.update();
   greenClouds.update();
   greenMountains.update();
@@ -105,7 +106,7 @@ void Engine::switchSprite(){
     Viewport::getInstance().setObjectToTrack(flyingSaucer);
   }
   else {
-    Viewport::getInstance().setObjectToTrack(rocket);
+    Viewport::getInstance().setObjectToTrack(knightWalk);
   }
 }
 

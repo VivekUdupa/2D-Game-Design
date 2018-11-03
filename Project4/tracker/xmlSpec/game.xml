@@ -107,19 +107,19 @@
   <transparency>true</transparency>
 </flyingSaucer>
 
-<rocket>
-  <file>assets/rocket.png</file>
-  <startLoc x="100" y="300"/>
-  <frames>6</frames>
-  <rightframes>3</rightframes>
-  <leftframes>3</leftframes>
+<knightWalk>
+  <file>assets/knightWalk.png</file>
+  <startLoc x="100" y="329"/>
+  <frames>14</frames>
+  <rightframes>7</rightframes>
+  <leftframes>7</leftframes>
   <frameInterval>150</frameInterval>
-  <imageWidth>250</imageWidth>
-  <imageHeight>150</imageHeight>
-  <speedX>1750</speedX>
+  <imageWidth>1477</imageWidth>
+  <imageHeight>1057</imageHeight>
+  <speedX>750</speedX>
   <speedY>0</speedY>
   <transparency>false</transparency>
-</rocket>
+</knightWalk>
 
 <YellowStar>
   <file>assets/yellowstar32.png</file>

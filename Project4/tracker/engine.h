@@ -35,7 +35,7 @@ private:
   Drawable* star;
   Drawable* astronaut;
   Drawable* flyingSaucer;
-  Drawable* rocket;
+  Drawable* knightWalk;
   int currentSprite;
   
   SDL_Color colour;
