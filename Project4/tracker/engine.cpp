@@ -7,10 +7,10 @@
 #include "sprite.h"
 #include "multisprite.h"
 #include "flyingSaucer.h"
-#include "rocket.h"
 #include "gameData.h"
 #include "engine.h"
 #include "frameGenerator.h"
+#include "player.h"
 
 Engine::~Engine() { 
   delete star;
@@ -42,14 +42,14 @@ Engine::Engine() :
   star(new Sprite("YellowStar")),
   astronaut(new MultiSprite("astronaut")),
   flyingSaucer(new FlyingSaucer("flyingSaucer")),
-  knightWalk(new Rocket("knightWalk")),
+  knightWalk(new Player("knightWalk")),
   currentSprite(0),
   colour({0, 0, 0xff, 0}),
   makeVideo( false )
 {
   astronaut->setScale(0.5);  
-  knightWalk->setScale(0.15);  
-  Viewport::getInstance().setObjectToTrack(knightWalk);
+  knightWalk->getPlayer()->setScale(0.15);  
+  Viewport::getInstance().setObjectToTrack(knightWalk->getPlayer());
   std::cout << "Loading complete" << std::endl;
 }
 
@@ -86,6 +86,7 @@ void Engine::update(Uint32 ticks) {
   astronaut->update(ticks);
   flyingSaucer->update(ticks);
   knightWalk->update(ticks);
+
   greenSky.update();
   greenClouds.update();
   greenMountains.update();
@@ -93,6 +94,7 @@ void Engine::update(Uint32 ticks) {
   greenBridge.update();
   greenHouse.update();
   greenGround.update();
+ 
   viewport.update(); // always update viewport last
 }
 
@@ -106,7 +108,7 @@ void Engine::switchSprite(){
     Viewport::getInstance().setObjectToTrack(flyingSaucer);
   }
   else {
-    Viewport::getInstance().setObjectToTrack(knightWalk);
+    Viewport::getInstance().setObjectToTrack(knightWalk->getPlayer());
   }
 }
 
@@ -150,9 +152,24 @@ void Engine::play() {
     ticks = clock.getElapsedTicks();
     if ( ticks > 0 ) {
       clock.incrFrame();
-      draw();
+      if( keystate[SDL_SCANCODE_A] ) {
+	  	static_cast<Player*>(knightWalk)->left();	  
+	  }
+      if( keystate[SDL_SCANCODE_D] ) {
+	  	static_cast<Player*>(knightWalk)->right();	  
+	  }
+      if( keystate[SDL_SCANCODE_W] ) {
+	  	static_cast<Player*>(knightWalk)->up();	  
+	  }
+      if( keystate[SDL_SCANCODE_S] ) {
+	  	static_cast<Player*>(knightWalk)->down();	  
+	  }
+	  
+	  
+	  draw();
       update(ticks);
-      if ( makeVideo ) {
+      
+	  if ( makeVideo ) {
         frameGen.makeFrame();
       }
     }

@@ -7,6 +7,8 @@
 #include "viewport.h"
 #include "gameData.h"
 
+class Player;
+
 class Engine {
 public:
   Engine ();
@@ -35,7 +37,7 @@ private:
   Drawable* star;
   Drawable* astronaut;
   Drawable* flyingSaucer;
-  Drawable* knightWalk;
+  Player* knightWalk;
   int currentSprite;
   
   SDL_Color colour;

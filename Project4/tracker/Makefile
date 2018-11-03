@@ -16,11 +16,11 @@ OBJS = \
 	image.o \
 	imageFactory.o \
 	frameGenerator.o \
+	player.o\
 	collisionStrategy.o \
 	sprite.o \
 	multisprite.o \
 	flyingSaucer.o \
-	rocket.o\
 	vector2f.o \
 	clock.o \
 	engine.o \
