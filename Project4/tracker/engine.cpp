@@ -159,7 +159,7 @@ void Engine::play() {
 	  	static_cast<Player*>(knightWalk)->right();	  
 	  }
       if( keystate[SDL_SCANCODE_W] ) {
-	  	static_cast<Player*>(knightWalk)->up();	  
+	  	static_cast<Player*>(knightWalk)->up();	 
 	  }
       if( keystate[SDL_SCANCODE_S] ) {
 	  	static_cast<Player*>(knightWalk)->down();	  

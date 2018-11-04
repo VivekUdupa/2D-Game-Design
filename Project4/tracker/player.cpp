@@ -71,14 +71,14 @@ void Player::left() {
 }
 
 void Player::down() {
-	if ( getY() > worldHeight- getScaledHeight() ) {
+	if ( getY() < worldHeight- getScaledHeight() ) {
 		setVelocityY( initialVelocity[1]);
 	}
 }
 
 void Player::up() {
-	if( getY() < 0 ) {
-		setVelocityY( - initialVelocity[1] );		
+	if( getY() > 0 ) {
+		setVelocityY( -initialVelocity[1] );		
 	}
 }
 
@@ -91,19 +91,19 @@ void Player::update(Uint32 ticks) {
 	setPosition(getPosition() + incr); 
 
 	if( getY() < 0 ) {
-		setVelocityY( fabs(getVelocityY()) );
+		setVelocityY( -fabs(getVelocityY()) );
 	}
 
 	if( getY() > worldHeight - getScaledHeight() ) {
-		setVelocityY( -fabs(getVelocityY()) );
+		setVelocityY( fabs(getVelocityY()) );
 	} 
 
 	if( getX() < 0 ) {
-		setVelocityX( fabs(getVelocityY()) );
+		setVelocityX( -fabs(getVelocityX()) );
 	}
 
 	if( getX() > worldWidth - getScaledWidth() ) {
-		setVelocityX( -fabs(getVelocityX()) );
+		setVelocityX( fabs(getVelocityX()) );
 	} 
 	
 	stop();
@@ -112,13 +112,13 @@ void Player::update(Uint32 ticks) {
 void Player::advanceFrame(Uint32 ticks) {
 	timeSinceLastFrame += ticks;
 	if (timeSinceLastFrame > frameInterval) {
-		if(getVelocityX() > 0)
+		if(getVelocityX() >= 0)
     	{
-			currentFrame = (currentFrame+1) % numberOfRightFrames;
+			currentFrame = (currentFrame+1) % numberOfLeftFrames;
 		}
 		else
 		{
-			currentFrame = numberOfRightFrames + (currentFrame+1) % numberOfLeftFrames;
+			currentFrame = numberOfLeftFrames + (currentFrame+1) % numberOfRightFrames;
 		}
 		timeSinceLastFrame = 0;
 	}
