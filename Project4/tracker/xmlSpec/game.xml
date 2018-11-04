@@ -116,8 +116,8 @@
   <frameInterval>150</frameInterval>
   <imageWidth>1477</imageWidth>
   <imageHeight>1057</imageHeight>
-  <speedX>750</speedX>
-  <speedY>0</speedY>
+  <speedX>1000</speedX>
+  <speedY>1000</speedY>
   <transparency>false</transparency>
 </knightWalk>
 

@@ -48,8 +48,8 @@ Engine::Engine() :
   makeVideo( false )
 {
   astronaut->setScale(0.5);  
-  knightWalk->getPlayer()->setScale(0.15);  
-  Viewport::getInstance().setObjectToTrack(knightWalk->getPlayer());
+  knightWalk->setScale(0.15);  
+  Viewport::getInstance().setObjectToTrack(knightWalk);
   std::cout << "Loading complete" << std::endl;
 }
 
@@ -108,7 +108,7 @@ void Engine::switchSprite(){
     Viewport::getInstance().setObjectToTrack(flyingSaucer);
   }
   else {
-    Viewport::getInstance().setObjectToTrack(knightWalk->getPlayer());
+    Viewport::getInstance().setObjectToTrack(knightWalk);
   }
 }
 

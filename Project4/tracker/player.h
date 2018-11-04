@@ -5,25 +5,20 @@
 #include<vector>
 #include<cmath>
 
-#include "multisprite.h"
+#include "drawable.h"
 
-class Player {
+class Player : public Drawable {
 public:
 	Player(const std::string&);
-	Player(Player&);
+	Player(const Player&);
 
-	void draw() const { player.draw(); }
-	void update( Uint32 ticks );
-	MultiSprite* getPlayer() { return &player; }
+	virtual void draw() const;
+	virtual void update( Uint32 ticks );
 
-	const std::string& getName() const {return player.getName(); }
-	int getX() const { return player.getX(); }
-	int getY() const { return player.getY(); }
-	const Image* getImage() const { return player.getImage(); }
-
-	int getScaledWidth() const { return player.getScaledWidth();  }
-	int getScaledHeight() const { return player.getScaledHeight();  }
-	const SDL_Surface* getSurface() const { return player.getSurface(); }
+	virtual const Image* getImage() const { return images[currentFrame]; }
+	int getScaledWidth() const { return getScale()*images[currentFrame]->getWidth();  }
+	int getScaledHeight() const { return getScale()*images[currentFrame]->getHeight();  }
+	const SDL_Surface* getSurface() const { return images[currentFrame]->getSurface(); }
 
 	void right();
 	void left();
@@ -31,13 +26,21 @@ public:
 	void down();
 	void stop();
 
-	Player& operator=(const Player&) = delete;
-
 private:
-	MultiSprite player;
-	Vector2f initialVelocity;
+	std::vector<Image *>images;
+
+	unsigned currentFrame;
+	unsigned numberOfRightFrames;
+	unsigned numberOfLeftFrames;
+	unsigned frameInterval;
+	float timeSinceLastFrame;
 	int worldWidth;
 	int worldHeight;
+	
+	Vector2f initialVelocity;
+
+	void advanceFrame(Uint32 ticks);
+	Player& operator=(const Player&);
 
 };
 #endif

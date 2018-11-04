@@ -3,11 +3,13 @@
 #include "imageFactory.h"
 
 void MultiSprite::advanceFrame(Uint32 ticks) {
+	
 	timeSinceLastFrame += ticks;
 	if (timeSinceLastFrame > frameInterval) {
     currentFrame = (currentFrame+1) % numberOfFrames;
 		timeSinceLastFrame = 0;
 	}
+
 }
 
 MultiSprite::MultiSprite( const std::string& name) :
