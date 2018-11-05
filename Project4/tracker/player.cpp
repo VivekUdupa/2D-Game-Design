@@ -61,12 +61,14 @@ void Player::stop() {
 void Player::right() {
 	if( getX() < worldWidth - getScaledWidth()) {
 		setVelocityX(initialVelocity[0]);
+		currentFrame = (currentFrame) % numberOfRightFrames;
 	}
 }
 
 void Player::left() {
 	if( getX() > 0 ) {
 		setVelocityX( -initialVelocity[0] );
+		currentFrame = numberOfRightFrames + (currentFrame) % numberOfLeftFrames;
 	}
 }
 
@@ -112,14 +114,22 @@ void Player::update(Uint32 ticks) {
 void Player::advanceFrame(Uint32 ticks) {
 	timeSinceLastFrame += ticks;
 	if (timeSinceLastFrame > frameInterval) {
-		if(getVelocityX() >= 0)
+		//To advance Frames towards Right
+		if(getVelocityX() > 0)
     	{
-			currentFrame = (currentFrame+1) % numberOfLeftFrames;
+			currentFrame = (currentFrame+1) % numberOfRightFrames;
 		}
+		//To keep the player idle
+		else if(getVelocityX() == 0)
+		{
+			currentFrame = currentFrame;
+		}
+		//To advance Frames towards Left 
 		else
 		{
-			currentFrame = numberOfLeftFrames + (currentFrame+1) % numberOfRightFrames;
+			currentFrame = numberOfRightFrames + (currentFrame+1) % numberOfLeftFrames;
 		}
+
 		timeSinceLastFrame = 0;
 	}
 

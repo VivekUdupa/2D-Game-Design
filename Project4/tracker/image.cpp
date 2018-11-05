@@ -5,7 +5,7 @@
 #include "renderContext.h"
 
 Image::Image( SDL_Surface* surf) : 
-//REplacing arrow in  renderer(RenderContext::getInstance()->getRenderer()),
+//Replacing arrow in  renderer(RenderContext::getInstance()->getRenderer()),
   renderer(RenderContext::getInstance().getRenderer()),
   surface( surf ),
   texture( nullptr ),
