@@ -1,6 +1,10 @@
+#ifndef CLOCK_H
+#define CLOCK_H
+
 #include <SDL.h>
 #include <string>
 
+//class Hud;
 class Engine;
 
 class Clock {
@@ -9,6 +13,7 @@ public:
   unsigned int getTicks() const;
 
 private:
+  friend class Hud;
   friend class Engine;
 
   bool started;
@@ -44,3 +49,4 @@ private:
   Clock(const Clock&);
   Clock&operator=(const Clock&);
 };
+#endif

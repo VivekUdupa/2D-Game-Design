@@ -30,9 +30,9 @@ Engine::Engine() :
   //renderer( rc->getRenderer() ),
   renderer( rc.getRenderer() ),
   //FPS
-  msgFPSPos(
-    Vector2f( gdata.getXmlInt("viewFPS/loc/x"), gdata.getXmlInt("viewFPS/loc/y") )
-  ),
+  //msgFPSPos(
+  //  Vector2f( gdata.getXmlInt("viewFPS/loc/x"), gdata.getXmlInt("viewFPS/loc/y") )
+  //),
   greenSky("greenSky", Gamedata::getInstance().getXmlInt("greenSky/factor") ),
   greenClouds("greenClouds", Gamedata::getInstance().getXmlInt("greenClouds/factor") ),
   greenMountains("greenMountains", Gamedata::getInstance().getXmlInt("greenMountains/factor") ),
@@ -73,14 +73,14 @@ void Engine::draw() const {
   flyingSaucer->draw();
   knightWalk->draw();
 
-	
+	/*
   //Printing FPS
   std::ostringstream fpsString;
   fpsString << "FPS: " << Clock::getInstance().getFps() << std::endl ;
 
   IoMod::getInstance().
     writeText(fpsString.str(), msgFPSPos[0], msgFPSPos[1], colour);
-
+  */
   hud.draw();
 
   viewport.draw();

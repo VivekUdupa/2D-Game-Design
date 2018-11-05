@@ -6,6 +6,7 @@
 #include <string>
 
 #include "vector2f.h"
+#include "clock.h"
 
 class Hud {
 public:	
@@ -39,6 +40,8 @@ private:
 	SDL_Color borderColor;
 	SDL_Color textColor;
 	bool on;
+	Clock& clock;
+	Vector2f msgFPSPos;
 
 	Hud();
 	Hud(const Hud&);

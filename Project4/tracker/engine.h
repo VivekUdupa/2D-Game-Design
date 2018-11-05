@@ -6,9 +6,10 @@
 #include "world.h"
 #include "viewport.h"
 #include "gameData.h"
+#include "hud.h"
 
 class Player;
-class Hud;
+//class Hud;
 
 class Engine {
 public:
@@ -25,7 +26,7 @@ private:
   Clock& clock ;
 
   SDL_Renderer * const renderer;
-  Vector2f msgFPSPos;
+  //Vector2f msgFPSPos;
   World greenSky;
   World greenClouds;
   World greenMountains;

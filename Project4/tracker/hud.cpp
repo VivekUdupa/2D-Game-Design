@@ -29,7 +29,9 @@ Hud::Hud() :
 			   static_cast<Uint8>(Gamedata::getInstance().getXmlInt("HUD/textColor/g")),
 			   static_cast<Uint8>(Gamedata::getInstance().getXmlInt("HUD/textColor/b")),
 			   static_cast<Uint8>(Gamedata::getInstance().getXmlInt("HUD/textColor/a"))}),
-	on(true)
+	on(true),
+	clock(Clock::getInstance() ),
+	msgFPSPos(Vector2f(Gamedata::getInstance().getXmlInt("viewFPS/loc/x"),Gamedata::getInstance().getXmlInt("viewFPS/loc/y") ))
 	{}
 
 void Hud::draw() {
@@ -54,10 +56,18 @@ void Hud::draw() {
 											  getPosition()[1]+3,
 											  getWidth(),
 											  getTextColor());
-		
-		IoMod::getInstance().writeText("\n\n\n\n\n\nF1 -> Toggle HUD",
+
+		std::ostringstream FpsString;
+		FpsString << "FPS: " << Clock::getInstance().getFps() << std::endl;
+		IoMod::getInstance().writeText(FpsString.str(),
 											  getPosition()[0]+3, 
-											  getPosition()[1]+3,
+											  getPosition()[1]+75,
+											  getWidth(),
+											  getTextColor());
+		
+		IoMod::getInstance().writeText("F1 -> Toggle HUD",
+											  getPosition()[0]+3, 
+											  getPosition()[1]+125,
 											  getWidth(),
 											  getTextColor());
 	}
