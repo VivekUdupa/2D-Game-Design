@@ -8,6 +8,7 @@
 #include "gameData.h"
 
 class Player;
+class Hud;
 
 class Engine {
 public:
@@ -43,6 +44,8 @@ private:
   SDL_Color colour;
 
   bool makeVideo;
+
+  Hud& hud;
 
   void draw() const;
   void update(Uint32);

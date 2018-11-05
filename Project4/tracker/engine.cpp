@@ -11,6 +11,8 @@
 #include "engine.h"
 #include "frameGenerator.h"
 #include "player.h"
+#include "hud.h"
+
 
 Engine::~Engine() { 
   delete star;
@@ -45,7 +47,8 @@ Engine::Engine() :
   knightWalk(new Player("knightWalk")),
   currentSprite(0),
   colour({0, 0, 0xff, 0}),
-  makeVideo( false )
+  makeVideo( false ),
+  hud(Hud::getInstance())
 {
   astronaut->setScale(0.5);  
   knightWalk->setScale(0.15);  
@@ -77,6 +80,9 @@ void Engine::draw() const {
 
   IoMod::getInstance().
     writeText(fpsString.str(), msgFPSPos[0], msgFPSPos[1], colour);
+
+  hud.draw();
+
   viewport.draw();
   SDL_RenderPresent(renderer);
 }
@@ -135,6 +141,9 @@ void Engine::play() {
         }
         if ( keystate[SDL_SCANCODE_T] ) {
           switchSprite();
+        }
+        if ( keystate[SDL_SCANCODE_F1] ) {
+          hud.setON(!hud.isON());
         }
         if (keystate[SDL_SCANCODE_F4] && !makeVideo) {
           std::cout << "Initiating frame capture" << std::endl;

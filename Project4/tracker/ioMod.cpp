@@ -74,8 +74,29 @@ void IoMod::writeText(const std::string& msg, int x, int y, SDL_Color colour) co
   colour.b = Gamedata::getInstance().getXmlInt("font/blue");
   colour.a = Gamedata::getInstance().getXmlInt("font/alpha");
   
-  SDL_Surface* surface = 
-    TTF_RenderText_Solid(font, msg.c_str(), colour);
+  SDL_Surface* surface = TTF_RenderText_Solid(font, msg.c_str(), colour);
+
+  SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
+
+  int textWidth = surface->w;
+  int textHeight = surface->h;
+  SDL_FreeSurface(surface);
+  SDL_Rect dst = {x, y, textWidth, textHeight};
+
+  SDL_RenderCopy(renderer, texture, NULL, &dst);
+  SDL_DestroyTexture(texture);
+}
+
+void IoMod::writeText(const std::string& msg, int x, int y, int wrapWidth, SDL_Color colour) const {
+  
+  //Set Color
+  colour.r = Gamedata::getInstance().getXmlInt("font/red");
+  colour.g = Gamedata::getInstance().getXmlInt("font/green");
+  colour.b = Gamedata::getInstance().getXmlInt("font/blue");
+  colour.a = Gamedata::getInstance().getXmlInt("font/alpha");
+  
+  //SDL_Surface* surface = TTF_RenderText_Solid(font, msg.c_str(), colour);
+  SDL_Surface* surface = TTF_RenderText_Blended_Wrapped(font, msg.c_str(), colour, wrapWidth);
 
   SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
 

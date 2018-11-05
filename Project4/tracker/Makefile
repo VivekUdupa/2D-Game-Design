@@ -15,6 +15,7 @@ OBJS = \
 	spriteSheet.o \
 	image.o \
 	imageFactory.o \
+	hud.o\
 	frameGenerator.o \
 	player.o\
 	collisionStrategy.o \

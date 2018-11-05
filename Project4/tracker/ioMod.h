@@ -12,6 +12,7 @@ public:
   void writeText(const std::string&, int, int) const;
   //overloading writeText to include font color
   void writeText(const std::string&, int, int, SDL_Color) const;
+  void writeText(const std::string&, int, int, int, SDL_Color) const;
   SDL_Renderer* getRenderer() const { return renderer; }
 private:
   int init;
