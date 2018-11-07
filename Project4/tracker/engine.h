@@ -7,9 +7,10 @@
 #include "viewport.h"
 #include "gameData.h"
 #include "hud.h"
+#include "smartSprite.h"
 
 class Player;
-//class Hud;
+class CollisionStrategy;
 
 class Engine {
 public:
@@ -36,11 +37,14 @@ private:
   World greenGround;
   Viewport& viewport;
 
-  Drawable* star;
-  Drawable* astronaut;
-  Drawable* ghost;
+ std::vector<SmartSprite*> sprites;
+ std::vector<CollisionStrategy*> strategies;
+ int currentStrategy;
+ int currentSprite;
+ bool collision;
+ 
+ // Drawable* ghost;
   Player* knightWalk;
-  int currentSprite;
   
   SDL_Color colour;
 

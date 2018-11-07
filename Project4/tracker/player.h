@@ -4,8 +4,10 @@
 #include<string>
 #include<vector>
 #include<cmath>
+#include<list>
 
 #include "drawable.h"
+#include "smartSprite.h"
 
 class Player : public Drawable {
 public:
@@ -14,6 +16,9 @@ public:
 
 	virtual void draw() const;
 	virtual void update( Uint32 ticks );
+
+	void collided() {collision = true;}
+	void missed() {collision = false;}
 
 	virtual const Image* getImage() const { return images[currentFrame]; }
 	int getScaledWidth() const { return getScale()*images[currentFrame]->getWidth();  }
@@ -26,6 +31,12 @@ public:
 	void down();
 	void stop();
 
+	void attach( SmartSprite* o) {observers.push_back(o); }
+	void detach (SmartSprite* o) ;
+
+protected:
+	std::list<SmartSprite*> observers;
+
 private:
 	std::vector<Image *>images;
 
@@ -37,6 +48,7 @@ private:
 	int worldWidth;
 	int worldHeight;
 	
+	bool collision;
 	Vector2f initialVelocity;
 
 	void advanceFrame(Uint32 ticks);

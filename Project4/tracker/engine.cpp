@@ -12,13 +12,20 @@
 #include "frameGenerator.h"
 #include "player.h"
 #include "hud.h"
+#include "collisionStrategy.h"
 
 
 Engine::~Engine() { 
-  delete star;
-  delete astronaut;
-  delete ghost;
+  for (auto sprite : sprites) {
+  	delete sprite;
+  }
+  
+  for (CollisionStrategy* strategy : strategies) {
+  	delete strategy;
+  }
+
   delete knightWalk;
+  
   std::cout << "Terminating program" << std::endl;
 }
 
@@ -41,18 +48,29 @@ Engine::Engine() :
   greenHouse("greenHouse", Gamedata::getInstance().getXmlInt("greenHouse/factor") ),
   greenGround("greenGround", Gamedata::getInstance().getXmlInt("greenGround/factor") ),
   viewport( Viewport::getInstance() ),
-  star(new Sprite("YellowStar")),
-  astronaut(new MultiSprite("astronaut")),
-  ghost(new TwoWayMultiSprite("ghost")),
-  knightWalk(new Player("knightWalk")),
+  sprites(std::vector<SmartSprite*> {}),
+  strategies(std::vector<CollisionStrategy*> {}),
+  currentStrategy(0),
   currentSprite(0),
+  collision(false),
+  //ghost(new TwoWayMultiSprite("ghost")),
+  knightWalk(new Player("knightWalk")),
   colour({0, 0, 0xff, 0}),
   makeVideo( false ),
   hud(Hud::getInstance())
 {
-  astronaut->setScale(0.5);  
-  ghost->setScale(0.15);  
-  knightWalk->setScale(0.15);  
+  //ghost->setScale(0.15);  
+  knightWalk->setScale(0.15); 
+
+  sprites.push_back(new SmartSprite("ghost", knightWalk->getPosition(), 221, 158 ));
+
+  knightWalk->attach(sprites[0]);
+
+  strategies.push_back( new RectangularCollisionStrategy );
+  strategies.push_back( new PerPixelCollisionStrategy );
+  strategies.push_back( new MidPointCollisionStrategy );
+
+
   Viewport::getInstance().setObjectToTrack(knightWalk);
   std::cout << "Loading complete" << std::endl;
 }
@@ -67,21 +85,17 @@ void Engine::draw() const {
  greenHouse.draw();
  greenGround.draw();
 
+  for (auto sprite : sprites) {
+  	sprite->draw();
+  }
+	
+  strategies[currentStrategy]->draw();
+  if(collision){
+  	IoMod::getInstance().writeText("Oops Collision!!", 500, 100);
+  }
 
-
- // star->draw();
-  astronaut->draw();
-  ghost->draw();
   knightWalk->draw();
-
-	/*
-  //Printing FPS
-  std::ostringstream fpsString;
-  fpsString << "FPS: " << Clock::getInstance().getFps() << std::endl ;
-
-  IoMod::getInstance().
-    writeText(fpsString.str(), msgFPSPos[0], msgFPSPos[1], colour);
-  */
+  
   hud.draw();
 
   viewport.draw();
@@ -89,10 +103,13 @@ void Engine::draw() const {
 }
 
 void Engine::update(Uint32 ticks) {
-  //star->update(ticks);
-  astronaut->update(ticks);
-  ghost->update(ticks);
+  checkForCollisions();
+
   knightWalk->update(ticks);
+
+  for (auto sprite : sprites) {
+  	sprite->update(ticks);
+  }
 
   greenSky.update();
   greenClouds.update();
@@ -105,6 +122,24 @@ void Engine::update(Uint32 ticks) {
   viewport.update(); // always update viewport last
 }
 
+void Engine::checkForCollisions() {
+	collision = false;
+	for (const Drawable* c : sprites) {
+		if( strategies[currentStrategy]->execute(*knightWalk, *c) ) {
+			collision = true;
+		}
+	}
+
+	if(collision) {
+		knightWalk->collided();
+	}
+	else {
+		knightWalk->missed();
+		collision = false;
+	}
+}
+
+/*
 void Engine::switchSprite(){
   ++currentSprite;
   currentSprite = currentSprite % 3;
@@ -118,6 +153,13 @@ void Engine::switchSprite(){
     Viewport::getInstance().setObjectToTrack(knightWalk);
   }
 }
+*/
+
+void Engine::switchSprite() {
+	++currentSprite;
+	currentSprite = currentSprite % sprites.size();
+    Viewport::getInstance().setObjectToTrack(sprites[currentSprite]);
+} 
 
 void Engine::play() {
   SDL_Event event;
@@ -142,6 +184,9 @@ void Engine::play() {
         }
         if ( keystate[SDL_SCANCODE_T] ) {
           switchSprite();
+        }
+        if ( keystate[SDL_SCANCODE_M] ) {
+          currentStrategy = (currentStrategy + 1) % strategies.size();
         }
         if ( keystate[SDL_SCANCODE_F1] ) {
           hud.setON(!hud.isON());

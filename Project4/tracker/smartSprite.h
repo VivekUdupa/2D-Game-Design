@@ -7,7 +7,7 @@
 class SmartSprite : public TwoWayMultiSprite {
 public:
 	SmartSprite(const std::string&, const Vector2f& pos, int w, int h);
-	SmartSPrite(const SmartSprite&);
+	SmartSprite(const SmartSprite&);
 	virtual ~SmartSprite() { }
 
 	virtual void update(Uint32 ticks);
@@ -19,9 +19,9 @@ private:
 	int playerWidth;
 	int playerHeight;
 	MODE currentMode;
-	float safeDist;
+	float safeDistance;
 
-	void runleft();
+	void runLeft();
 	void runRight();
 	void runUp();
 	void runDown();

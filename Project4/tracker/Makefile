@@ -22,6 +22,7 @@ OBJS = \
 	sprite.o \
 	multisprite.o \
 	twoWayMultiSprite.o \
+	smartSprite.o\
 	flyingSaucer.o \
 	vector2f.o \
 	clock.o \

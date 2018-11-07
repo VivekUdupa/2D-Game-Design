@@ -9,6 +9,7 @@ Player::Player( const std::string& name):
 			Vector2f(Gamedata::getInstance().getXmlInt(name+"/speedX"),
 					 Gamedata::getInstance().getXmlInt(name+"/speedY"))
 			),
+	observers(std::list<SmartSprite*> {}),
 	images( ImageFactory::getInstance().getImages(name) ),
 	
 	currentFrame(0),
@@ -18,11 +19,13 @@ Player::Player( const std::string& name):
 	timeSinceLastFrame(0),
 	worldWidth( Gamedata::getInstance().getXmlInt("world/width") ),
 	worldHeight( Gamedata::getInstance().getXmlInt("world/height") ),
+	collision(false),
 	initialVelocity( getVelocity() )
 	{ }
 
 Player::Player(const Player& s) :
 	Drawable(s),
+	observers(std::list<SmartSprite*> {}),
 	images(s.images),
 	currentFrame(s.currentFrame),
 	numberOfRightFrames(s.numberOfRightFrames),
@@ -31,11 +34,13 @@ Player::Player(const Player& s) :
 	timeSinceLastFrame(s.timeSinceLastFrame),
 	worldWidth(s.worldWidth),
 	worldHeight(s.worldHeight),
+	collision(s.collision),
 	initialVelocity(s.initialVelocity)
 	{}
 
 Player& Player::operator=(const Player& s) {
 	Drawable::operator=(s);
+	observers = s.observers;
 	images = (s.images);
 	currentFrame = (s.currentFrame);
 	numberOfRightFrames = (s.numberOfRightFrames);
@@ -44,6 +49,7 @@ Player& Player::operator=(const Player& s) {
 	timeSinceLastFrame = (s.timeSinceLastFrame);
 	worldWidth = (s.worldWidth);
 	worldHeight = (s.worldHeight);
+	collision = s.collision;
 	initialVelocity = (s.initialVelocity);
 	return *this;
 }
@@ -85,9 +91,16 @@ void Player::up() {
 }
 
 void Player::update(Uint32 ticks) {
-	//player.update(ticks);
-	//stop();
-	advanceFrame(ticks);
+	
+	std::list<SmartSprite*>::iterator sp = observers.begin();
+	while( sp != observers.end() ) {
+		(*sp)->setPlayerPos( getPosition() );
+		++sp;
+	}
+	
+	if(!collision) {
+		advanceFrame(ticks);
+	}
 
 	Vector2f incr = getVelocity() * static_cast<float>(ticks) *  0.001;
 	setPosition(getPosition() + incr); 
@@ -133,4 +146,15 @@ void Player::advanceFrame(Uint32 ticks) {
 		timeSinceLastFrame = 0;
 	}
 
+}
+
+void Player::detach (SmartSprite* o) {
+	std::list<SmartSprite*>::iterator sp = observers.begin();
+	while (sp != observers.end()) {
+		if(*sp == o) {
+			sp = observers.erase(sp);
+			return;
+		}
+		++sp;
+	}
 }
