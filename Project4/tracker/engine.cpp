@@ -61,10 +61,22 @@ Engine::Engine() :
 {
   //ghost->setScale(0.15);  
   knightWalk->setScale(0.15); 
+	
+  int n = gdata.getXmlInt("ghost/count");
+  Vector2f pos = knightWalk->getPosition();
+  int w = knightWalk->getScaledWidth();
+  int h = knightWalk->getScaledHeight();
+  sprites.reserve(n);
 
-  sprites.push_back(new SmartSprite("ghost", knightWalk->getPosition(), 221, 158 ));
+  std::cout << "count: " << n << " width = " << w << " height = " << h << std::endl;
 
-  knightWalk->attach(sprites[0]);
+  for (int i = 0; i < n; ++i) {
+  	//sprites.push_back(new SmartSprite("ghost", knightWalk->getPosition(), 221, 158 ));
+  	sprites.push_back(new SmartSprite("ghost", pos, w, h) );
+    knightWalk->attach(sprites[i]);
+  }
+
+  //knightWalk->attach(sprites[0]);
 
   strategies.push_back( new RectangularCollisionStrategy );
   strategies.push_back( new PerPixelCollisionStrategy );
@@ -85,7 +97,11 @@ void Engine::draw() const {
  greenHouse.draw();
  greenGround.draw();
 
-  for (auto sprite : sprites) {
+ std::stringstream strm;
+ strm << sprites.size() << "Ghosts remaining";
+ io.writeText(strm.str(), 30, 60);
+
+  for (const Drawable* sprite : sprites) {
   	sprite->draw();
   }
 	
@@ -107,7 +123,7 @@ void Engine::update(Uint32 ticks) {
 
   knightWalk->update(ticks);
 
-  for (auto sprite : sprites) {
+  for (Drawable* sprite : sprites) {
   	sprite->update(ticks);
   }
 
