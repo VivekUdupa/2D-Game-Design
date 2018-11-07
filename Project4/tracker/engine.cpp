@@ -71,7 +71,6 @@ Engine::Engine() :
   std::cout << "count: " << n << " width = " << w << " height = " << h << std::endl;
 
   for (int i = 0; i < n; ++i) {
-  	//sprites.push_back(new SmartSprite("ghost", knightWalk->getPosition(), 221, 158 ));
   	sprites.push_back(new SmartSprite("ghost", pos, w, h) );
     knightWalk->attach(sprites[i]);
   }
@@ -98,7 +97,7 @@ void Engine::draw() const {
  greenGround.draw();
 
  std::stringstream strm;
- strm << sprites.size() << "Ghosts remaining";
+ strm << "Ghosts Remaining: " << sprites.size() << std::endl;
  io.writeText(strm.str(), 30, 60);
 
   for (const Drawable* sprite : sprites) {
@@ -138,6 +137,7 @@ void Engine::update(Uint32 ticks) {
   viewport.update(); // always update viewport last
 }
 
+/*
 void Engine::checkForCollisions() {
 	collision = false;
 	for (const Drawable* c : sprites) {
@@ -154,22 +154,27 @@ void Engine::checkForCollisions() {
 		collision = false;
 	}
 }
-
-/*
-void Engine::switchSprite(){
-  ++currentSprite;
-  currentSprite = currentSprite % 3;
-  if ( currentSprite == 1) {
-    Viewport::getInstance().setObjectToTrack(astronaut);
-  }
-  else if(currentSprite == 2) {
-    Viewport::getInstance().setObjectToTrack(ghost);
-  }
-  else {
-    Viewport::getInstance().setObjectToTrack(knightWalk);
-  }
-}
 */
+
+void Engine::checkForCollisions() {
+	collision = false;
+	auto it = sprites.begin();
+	while( it != sprites.end() ) {
+		if( strategies[currentStrategy]->execute(*knightWalk, **it) ) {
+		collision = true;
+		knightWalk->collided();
+		SmartSprite* doa = *it;
+		knightWalk->detach(doa);
+		delete doa;
+		it = sprites.erase(it);
+		}
+	else{
+	++it;
+	knightWalk->missed();
+	collision = false;
+	} 
+	}
+}
 
 void Engine::switchSprite() {
 	++currentSprite;

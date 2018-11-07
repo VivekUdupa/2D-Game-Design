@@ -11,7 +11,7 @@ public:
 	virtual ~SmartSprite() { }
 
 	virtual void update(Uint32 ticks);
-	void setPlayerPos(const Vector2f& p) { playerPos = p;}
+	void notify(const Vector2f& p) { playerPos = p;}
 
 private:
 	enum MODE {NORMAL, EVADE};

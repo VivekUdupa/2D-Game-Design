@@ -92,10 +92,10 @@ void Player::up() {
 
 void Player::update(Uint32 ticks) {
 	
-	std::list<SmartSprite*>::iterator sp = observers.begin();
-	while( sp != observers.end() ) {
-		(*sp)->setPlayerPos( getPosition() );
-		++sp;
+	std::list<SmartSprite*>::iterator o = observers.begin();
+	while( o != observers.end() ) {
+		(*o)->notify( getPosition() );
+		++o;
 	}
 	
 	if(!collision) {
