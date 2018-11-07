@@ -38,7 +38,7 @@ private:
 
   Drawable* star;
   Drawable* astronaut;
-  Drawable* flyingSaucer;
+  Drawable* ghost;
   Player* knightWalk;
   int currentSprite;
   

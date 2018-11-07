@@ -6,7 +6,7 @@
 #include <iomanip>
 #include "sprite.h"
 #include "multisprite.h"
-#include "flyingSaucer.h"
+#include "twoWayMultiSprite.h"
 #include "gameData.h"
 #include "engine.h"
 #include "frameGenerator.h"
@@ -17,7 +17,7 @@
 Engine::~Engine() { 
   delete star;
   delete astronaut;
-  delete flyingSaucer;
+  delete ghost;
   delete knightWalk;
   std::cout << "Terminating program" << std::endl;
 }
@@ -43,7 +43,7 @@ Engine::Engine() :
   viewport( Viewport::getInstance() ),
   star(new Sprite("YellowStar")),
   astronaut(new MultiSprite("astronaut")),
-  flyingSaucer(new FlyingSaucer("flyingSaucer")),
+  ghost(new TwoWayMultiSprite("ghost")),
   knightWalk(new Player("knightWalk")),
   currentSprite(0),
   colour({0, 0, 0xff, 0}),
@@ -51,6 +51,7 @@ Engine::Engine() :
   hud(Hud::getInstance())
 {
   astronaut->setScale(0.5);  
+  ghost->setScale(0.15);  
   knightWalk->setScale(0.15);  
   Viewport::getInstance().setObjectToTrack(knightWalk);
   std::cout << "Loading complete" << std::endl;
@@ -70,7 +71,7 @@ void Engine::draw() const {
 
  // star->draw();
   astronaut->draw();
-  flyingSaucer->draw();
+  ghost->draw();
   knightWalk->draw();
 
 	/*
@@ -90,7 +91,7 @@ void Engine::draw() const {
 void Engine::update(Uint32 ticks) {
   //star->update(ticks);
   astronaut->update(ticks);
-  flyingSaucer->update(ticks);
+  ghost->update(ticks);
   knightWalk->update(ticks);
 
   greenSky.update();
@@ -111,7 +112,7 @@ void Engine::switchSprite(){
     Viewport::getInstance().setObjectToTrack(astronaut);
   }
   else if(currentSprite == 2) {
-    Viewport::getInstance().setObjectToTrack(flyingSaucer);
+    Viewport::getInstance().setObjectToTrack(ghost);
   }
   else {
     Viewport::getInstance().setObjectToTrack(knightWalk);

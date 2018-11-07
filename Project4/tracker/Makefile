@@ -21,6 +21,7 @@ OBJS = \
 	collisionStrategy.o \
 	sprite.o \
 	multisprite.o \
+	twoWayMultiSprite.o \
 	flyingSaucer.o \
 	vector2f.o \
 	clock.o \

@@ -131,6 +131,20 @@
   <transparency>false</transparency>
 </knightWalk>
 
+<ghost>
+  <file>assets/ghost.png</file>
+  <startLoc x="100" y="100"/>
+  <frames>2</frames>
+  <rightframes>1</rightframes>
+  <leftframes>1</leftframes>
+  <frameInterval>150</frameInterval>
+  <imageWidth>800</imageWidth>
+  <imageHeight>800</imageHeight>
+  <speedX>900</speedX>
+  <speedY>500</speedY>
+  <transparency>false</transparency>
+</ghost>
+
 <YellowStar>
   <file>assets/yellowstar32.png</file>
   <startLoc x="227" y="240"/>
