@@ -134,7 +134,7 @@
 <ghost>
   <file>assets/ghost.png</file>
   <startLoc x="500" y="300"/>
-  <count>10</count>
+  <count>2</count>
   <frames>2</frames>
   <rightframes>1</rightframes>
   <leftframes>1</leftframes>
