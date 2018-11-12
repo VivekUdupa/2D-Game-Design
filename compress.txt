@@ -1,0 +1,5 @@
+compress
+tar zcvf asg1.tar.gz asg1
+
+uncompress
+tar zxvf asg1.tar.gz

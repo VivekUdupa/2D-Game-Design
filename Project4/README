@@ -17,7 +17,12 @@ Foundation to a playable game that includes:
 
 
 Where I got my sprites: 
-<<Insert links here>>
+
+The background was taken from:
+https://craftpix.net/freebies/free-halloween-2d-game-backgrounds/
+
+The player sprite was taken from :
+https://craftpix.net/freebies/2d-fantasy-knight-free-sprite-sheets/
 
 What sprite did I create (not Sprite or MultiSprite):
 Knight -> This is the player who can be controlled by a,s,d,w. 
@@ -30,7 +35,7 @@ Problems that I had in completing this project:
 I do not know how anchor the player to the ground. The player just floats around now.
 
 Light at the end of the tunnel: 
-In want to design a game where the player must go through a series of obstacles/traps to reach the other end. 
+I want to design a game where the player must go through a series of obstacles/traps to reach the other end. 
 The player( who is a knight currently ) has to escape through a haunted graveyard where zombies and gosts try to attack him. I want to include pit holes and some other traps which has to be avoided. The knight has to collect a key to unlock the door reaching which concludes the game. 
 
 
