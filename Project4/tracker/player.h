@@ -31,7 +31,7 @@ public:
 	void down();
 	void stop();
 
-	void attach( SmartSprite* o) {observers.push_back(o); }
+	void attach( SmartSprite* o) {observers.emplace_back(o); }
 	void detach (SmartSprite* o) ;
 
 protected:

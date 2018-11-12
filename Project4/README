@@ -4,44 +4,33 @@ Course: CPSC 6160
 
 Clemson Email Address: vkoodli@clemson.edu
 
-Project no: 3
+Project no: 4
 
-Project due date: Oct.15 , 2018
+Project due date: November 9th, 2018
 
 Project description:
-This project included the implementation of inheritance and polymorphism, design patterns including factory and singleton, data-driven programming and a tracker framework.  
-I drawing is called Space Adventures. 
+Foundation to a playable game that includes:
+	-HUD
+	-Player object that can be controlled using a,s,d,w keys
+	-Collision Detection
+	-AI opponents
+
 
 Where I got my sprites: 
-I drew the sprites using inkspace and GIMP. The following were used as references/inspirations. 
-Astronaut:
-https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX7024296.jpg
-Rocket:
-https://www.vexels.com/vectors/preview/148320/spaceship-silhouettes-collection
-UFO:
-https://s3.envato.com/files/36796707/flying%20saucer_preview.jpg
-
-I DID NOT draw the backgrounds. The backgrounds were taken from the following sites:
-Planets:
-http://www.mygraphichunt.com/wp-content/uploads/2015/09/wpid-planet-vectors.jpg
-Space:
-https://www.vecteezy.com/vector-art/176057-stars-filled-space-background
-
-
-How many backgrounds do I have: I have 3 backgrounds.
-1) Background starry Space (spaceBG.png)
-2) Big planets (planetsBig.png)
-3) Small planets (planetsSmall.png)
+<<Insert links here>>
 
 What sprite did I create (not Sprite or MultiSprite):
-I created 3 sprites: 
-1) Rotating astronaut with 24 frames
-2) UFO with 2 frames
-3) Rocket with 6 frames. This is a two way multisprite where 3 frames go right and 3 go left. 
+Knight -> This is the player who can be controlled by a,s,d,w. 
+ghosts -> these are smart sprites that has AI. 
 
 The easiest part of this project:
-1) Converting the ranged for loops to while loops and vice versa. 
+Implementing the HUD
 
 Problems that I had in completing this project:
-1) I took some time to figure out how to print FPS.
-2) Unclear on Singletons. I converted Gof to Mayers singleton by fixing one error at a time. 
+I do not know how anchor the player to the ground. The player just floats around now.
+
+Light at the end of the tunnel: 
+In want to design a game where the player must go through a series of obstacles/traps to reach the other end. 
+The player( who is a knight currently ) has to escape through a haunted graveyard where zombies and gosts try to attack him. I want to include pit holes and some other traps which has to be avoided. The knight has to collect a key to unlock the door reaching which concludes the game. 
+
+

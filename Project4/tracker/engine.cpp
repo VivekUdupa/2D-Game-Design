@@ -178,8 +178,14 @@ void Engine::checkForCollisions() {
 
 void Engine::switchSprite() {
 	++currentSprite;
-	currentSprite = currentSprite % sprites.size();
-    Viewport::getInstance().setObjectToTrack(sprites[currentSprite]);
+	currentSprite = currentSprite % sprites.size() ; 
+	std::cout << "currentSprite = " << currentSprite << std::endl; 
+	//if (currentSprite!= 0 && sprites.size()!= 0) {
+    	Viewport::getInstance().setObjectToTrack(sprites[currentSprite]);
+	//}
+	//else {
+    //	Viewport::getInstance().setObjectToTrack(knightWalk);
+	//}
 } 
 
 void Engine::play() {
