@@ -1,5 +1,12 @@
+
 compress
+-------------------------
 tar zcvf asg1.tar.gz asg1
+zip -r asg1.zip asg1
 
 uncompress
+-------------------------
 tar zxvf asg1.tar.gz
+unzip asg1.zip -d asg1
+
+
