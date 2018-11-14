@@ -22,8 +22,8 @@ void TwoWayMultiSprite::advanceFrame(Uint32 ticks) {
 }
 
 Vector2f TwoWayMultiSprite::makeVelocity(int vx, int vy) const {
-	float newvx = Gamedata::getInstance().getRandFloat(vx-50, vx+50);
-	float newvy = Gamedata::getInstance().getRandFloat(vy-50, vy+50);
+	float newvx =  Gamedata::getInstance().getRandFloat(vx-50, vx+50);
+	float newvy =  Gamedata::getInstance().getRandFloat(vy-50, vy+50);
 	newvx *= [](){ if(rand()%2) return -1; else return 1; }();
 	newvy *= [](){ if(rand()%2) return -1; else return 1; }();
 

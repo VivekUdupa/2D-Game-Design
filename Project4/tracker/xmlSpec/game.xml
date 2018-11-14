@@ -131,6 +131,20 @@
   <transparency>false</transparency>
 </knightWalk>
 
+<zombieFall>
+  <file>assets/zombieFall.png</file>
+  <startLoc x="100" y="329"/>
+  <frames>16</frames>
+  <rightframes>8</rightframes>
+  <leftframes>8</leftframes>
+  <frameInterval>550</frameInterval>
+  <imageWidth>90</imageWidth>
+  <imageHeight>175</imageHeight>
+  <speedX>000</speedX>
+  <speedY>0</speedY>
+  <transparency>false</transparency>
+</zombieFall>
+
 <ghost>
   <file>assets/ghost.png</file>
   <startLoc x="500" y="300"/>

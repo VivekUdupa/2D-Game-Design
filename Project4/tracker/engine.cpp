@@ -55,6 +55,7 @@ Engine::Engine() :
   collision(false),
   //ghost(new TwoWayMultiSprite("ghost")),
   knightWalk(new Player("knightWalk")),
+  zombieFall(new TwoWayMultiSprite("zombieFall")),
   colour({0, 0, 0xff, 0}),
   makeVideo( false ),
   hud(Hud::getInstance())
@@ -110,6 +111,7 @@ void Engine::draw() const {
   }
 
   knightWalk->draw();
+  zombieFall->draw();
   
   hud.draw();
 
@@ -121,6 +123,7 @@ void Engine::update(Uint32 ticks) {
   checkForCollisions();
 
   knightWalk->update(ticks);
+  zombieFall->update(ticks);
 
   for (Drawable* sprite : sprites) {
   	sprite->update(ticks);

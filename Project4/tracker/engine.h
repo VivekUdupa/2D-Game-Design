@@ -45,7 +45,8 @@ private:
  
  // Drawable* ghost;
   Player* knightWalk;
-  
+  TwoWayMultiSprite* zombieFall;
+
   SDL_Color colour;
 
   bool makeVideo;
