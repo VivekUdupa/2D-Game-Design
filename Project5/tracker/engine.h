@@ -21,13 +21,11 @@ public:
 
 private:
   const Gamedata& gdata;
-  //const RenderContext* rc;
   const RenderContext& rc;
   const IoMod& io;
   Clock& clock ;
 
   SDL_Renderer * const renderer;
-  //Vector2f msgFPSPos;
   World greenSky;
   World greenClouds;
   World greenMountains;
@@ -37,13 +35,11 @@ private:
   World greenGround;
   Viewport& viewport;
 
- std::vector<SmartSprite*> sprites;
- std::vector<CollisionStrategy*> strategies;
- int currentStrategy;
- int currentSprite;
- bool collision;
+  std::vector<CollisionStrategy*> strategies;
+  int currentStrategy;
+  int currentSprite;
+  bool collision;
  
-  //Player* knightWalk;
   std::vector<Drawable*> sprites;
 
   SDL_Color colour;

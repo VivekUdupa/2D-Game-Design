@@ -23,8 +23,6 @@ Engine::~Engine() {
   for (CollisionStrategy* strategy : strategies) {
   	delete strategy;
   }
-
-  delete knightWalk;
   
   std::cout << "Terminating program" << std::endl;
 }
@@ -34,12 +32,7 @@ Engine::Engine() :
   rc( RenderContext::getInstance() ),
   io( IoMod::getInstance() ),
   clock( Clock::getInstance() ),
-  //renderer( rc->getRenderer() ),
   renderer( rc.getRenderer() ),
-  //FPS
-  //msgFPSPos(
-  //  Vector2f( gdata.getXmlInt("viewFPS/loc/x"), gdata.getXmlInt("viewFPS/loc/y") )
-  //),
   greenSky("greenSky", Gamedata::getInstance().getXmlInt("greenSky/factor") ),
   greenClouds("greenClouds", Gamedata::getInstance().getXmlInt("greenClouds/factor") ),
   greenMountains("greenMountains", Gamedata::getInstance().getXmlInt("greenMountains/factor") ),
@@ -48,42 +41,40 @@ Engine::Engine() :
   greenHouse("greenHouse", Gamedata::getInstance().getXmlInt("greenHouse/factor") ),
   greenGround("greenGround", Gamedata::getInstance().getXmlInt("greenGround/factor") ),
   viewport( Viewport::getInstance() ),
-  sprites(std::vector<SmartSprite*> {}),
   strategies(std::vector<CollisionStrategy*> {}),
   currentStrategy(0),
   currentSprite(0),
   collision(false),
-  //ghost(new TwoWayMultiSprite("ghost")),
-  knightWalk(new Player("knightWalk")),
+  sprites(),
   colour({0, 0, 0xff, 0}),
   makeVideo( false ),
   hud(Hud::getInstance())
 {
-  //ghost->setScale(0.15);  
-  knightWalk->setScale(0.15); 
+    int n = gdata.getXmlInt("ghost/count"); //Number of ghosts
+	sprites.reserve(n+1); //plus 1 for the player
 	
-  int n = gdata.getXmlInt("ghost/count");
-  Vector2f pos = knightWalk->getPosition();
-  int w = knightWalk->getScaledWidth();
-  int h = knightWalk->getScaledHeight();
-  sprites.reserve(n);
+	{
+	Drawable* s = new Player("knightWalk");
+	s->setScale(0.15);
+	sprites.push_back(s);
+	}	
 
-  std::cout << "count: " << n << " width = " << w << " height = " << h << std::endl;
+   Vector2f pos = static_cast<Player*>(sprites[0])->getPosition();
+   int w = static_cast<Player*>(sprites[0])->getScaledWidth();
+   int h = static_cast<Player*>(sprites[0])->getScaledHeight();
 
-  for (int i = 0; i < n; ++i) {
-  	sprites.push_back(new SmartSprite("ghost", pos, w, h) );
-    knightWalk->attach(sprites[i]);
-  }
+   for (int i = 1; i < n+1; ++i) {
+  	 sprites.push_back(new SmartSprite("ghost", pos, w, h) );
+     static_cast<Player*>(sprites[0])->attach(static_cast<SmartSprite*>(sprites[i]));
+   }
 
-  //knightWalk->attach(sprites[0]);
-
-  strategies.push_back( new RectangularCollisionStrategy );
-  strategies.push_back( new PerPixelCollisionStrategy );
-  strategies.push_back( new MidPointCollisionStrategy );
+   strategies.push_back( new RectangularCollisionStrategy );
+   strategies.push_back( new PerPixelCollisionStrategy );
+   strategies.push_back( new MidPointCollisionStrategy );
 
 
-  Viewport::getInstance().setObjectToTrack(knightWalk);
-  std::cout << "Loading complete" << std::endl;
+   Viewport::getInstance().setObjectToTrack(static_cast<Player*>(sprites[0]));
+   std::cout << "Loading complete" << std::endl;
 }
 
 void Engine::draw() const {
@@ -109,7 +100,7 @@ void Engine::draw() const {
   	IoMod::getInstance().writeText("Oops Collision!!", 500, 100);
   }
 
-  knightWalk->draw();
+  //knightWalk->draw();
   
   hud.draw();
 
@@ -120,7 +111,7 @@ void Engine::draw() const {
 void Engine::update(Uint32 ticks) {
   checkForCollisions();
 
-  knightWalk->update(ticks);
+  //knightWalk->update(ticks);
 
   for (Drawable* sprite : sprites) {
   	sprite->update(ticks);
@@ -141,17 +132,18 @@ void Engine::checkForCollisions() {
 	collision = false;
 	auto it = sprites.begin();
 	while( it != sprites.end() ) {
-		if( strategies[currentStrategy]->execute(*knightWalk, **it) ) {
+		if( strategies[currentStrategy]->execute(*static_cast<Player*>(sprites[0]), **it) ) {
 		collision = true;
-		knightWalk->collided();
-		SmartSprite* doa = *it;
-		knightWalk->detach(doa);
+		static_cast<Player*>(sprites[0])->collided();
+		//SmartSprite* doa = *it;
+		Drawable* doa = *it;
+		static_cast<Player*>(sprites[0])->detach(static_cast<SmartSprite*>(doa));
 		delete doa;
 		it = sprites.erase(it);
 		}
 	else{
 	++it;
-	knightWalk->missed();
+	static_cast<Player*>(sprites[0])->missed();
 	collision = false;
 	} 
 	}
@@ -159,15 +151,9 @@ void Engine::checkForCollisions() {
 
 void Engine::switchSprite() {
 	++currentSprite;
-	currentSprite = currentSprite % (sprites.size() + 1) ; //+1 for the player
-//	std::cout << "currentSprite = " << currentSprite << std::endl; 
-	if (currentSprite < static_cast<int>(sprites.size()))  {
-    	Viewport::getInstance().setObjectToTrack(sprites[currentSprite]);
-	}
-	else {
-    	Viewport::getInstance().setObjectToTrack(knightWalk);
-	}
-} 
+	currentSprite = currentSprite % (sprites.size());
+    Viewport::getInstance().setObjectToTrack(sprites[currentSprite]);
+	} 
 
 void Engine::play() {
   SDL_Event event;
@@ -197,8 +183,7 @@ void Engine::play() {
           currentStrategy = (currentStrategy + 1) % strategies.size();
         }
         if ( keystate[SDL_SCANCODE_E] ) {
-	    	 knightWalk->explode();
-			//sprites[currentSprite]->explode();
+			sprites[currentSprite]->explode();
 		}
         if ( keystate[SDL_SCANCODE_F1] ) {
           hud.setON(!hud.isON());
@@ -220,16 +205,16 @@ void Engine::play() {
     if ( ticks > 0 ) {
       clock.incrFrame();
       if( keystate[SDL_SCANCODE_A] ) {
-	  	static_cast<Player*>(knightWalk)->left();	  
+	  	static_cast<Player*>(sprites[0])->left();	  
 	  }
       if( keystate[SDL_SCANCODE_D] ) {
-	  	static_cast<Player*>(knightWalk)->right();	  
+	  	static_cast<Player*>(sprites[0])->right();	  
 	  }
       if( keystate[SDL_SCANCODE_W] ) {
-	  	static_cast<Player*>(knightWalk)->up();	 
+	  	static_cast<Player*>(sprites[0])->up();	 
 	  }
       if( keystate[SDL_SCANCODE_S] ) {
-	  	static_cast<Player*>(knightWalk)->down();	  
+	  	static_cast<Player*>(sprites[0])->down();	  
 	  }
 	  
 	  
