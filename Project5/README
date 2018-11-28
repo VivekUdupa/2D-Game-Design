@@ -1,0 +1,41 @@
+Name: Vivek Koodli Udupa
+
+Course: CPSC 6160
+
+Clemson Email Address: vkoodli@clemson.edu
+
+Project no: 4
+
+Project due date: November 9th, 2018
+
+Project description:
+Foundation to a playable game that includes:
+	-HUD
+	-Player object that can be controlled using a,s,d,w keys
+	-Collision Detection
+	-AI opponents
+
+
+Where I got my sprites: 
+
+The background was taken from:
+https://craftpix.net/freebies/free-halloween-2d-game-backgrounds/
+
+The player sprite was taken from :
+https://craftpix.net/freebies/2d-fantasy-knight-free-sprite-sheets/
+
+What sprite did I create (not Sprite or MultiSprite):
+Knight -> This is the player who can be controlled by a,s,d,w. 
+ghosts -> these are smart sprites that has AI. 
+
+The easiest part of this project:
+Implementing the HUD
+
+Problems that I had in completing this project:
+I do not know how anchor the player to the ground. The player just floats around now.
+
+Light at the end of the tunnel: 
+I want to design a game where the player must go through a series of obstacles/traps to reach the other end. 
+The player( who is a knight currently ) has to escape through a haunted graveyard where zombies and gosts try to attack him. I want to include pit holes and some other traps which has to be avoided. The knight has to collect a key to unlock the door reaching which concludes the game. 
+
+
