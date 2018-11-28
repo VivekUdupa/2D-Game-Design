@@ -6,7 +6,7 @@
 #include "drawable.h"
 #include "explodingSprite.h"
 
-class ExplodingStar;
+class ExplodingSprite;
 
 class TwoWayMultiSprite : public Drawable {
 public:

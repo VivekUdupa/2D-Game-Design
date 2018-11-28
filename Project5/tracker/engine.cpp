@@ -197,7 +197,8 @@ void Engine::play() {
           currentStrategy = (currentStrategy + 1) % strategies.size();
         }
         if ( keystate[SDL_SCANCODE_E] ) {
-        	sprites[currentSprite]->explode();
+	    	 knightWalk->explode();
+			//sprites[currentSprite]->explode();
 		}
         if ( keystate[SDL_SCANCODE_F1] ) {
           hud.setON(!hud.isON());

@@ -8,8 +8,7 @@ class ExplodingSprite;
 class Sprite : public Drawable {
 public:
   Sprite(const std::string&);
-  Sprite(const std::string&, const Vector2f& pos, const Vector2f& vel, 
-         const Image*);
+  Sprite(const std::string&, const Vector2f&, const Vector2f&, const Image*);
   Sprite(const Sprite&);
   virtual ~Sprite();
   Sprite& operator=(const Sprite&);

@@ -51,7 +51,7 @@ public:
   float getVelocityY() const   { return velocity[1]; }
   void  setVelocityY(float vy) { velocity[1] = vy;   }
 
-  virtual void explode();
+  virtual void explode() { throw std::string("I don't explode!"); }
 
 private:
   std::string name;

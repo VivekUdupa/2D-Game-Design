@@ -129,6 +129,10 @@
   <speedX>500</speedX>
   <speedY>500</speedY>
   <transparency>false</transparency>
+  <chunk>
+  	<size>200</size>
+	<distance>200</distance>
+  </chunk>
 </knightWalk>
 
 <zombieFall>
@@ -159,6 +163,10 @@
   <speedY>200</speedY>
   <safeDistance>250</safeDistance>
   <transparency>false</transparency>
+  <chunk>
+  	<size>20</size>
+	<distance>200</distance>
+  </chunk>
 </ghost>
 
 </GameData>

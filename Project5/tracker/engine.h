@@ -43,8 +43,8 @@ private:
  int currentSprite;
  bool collision;
  
- // Drawable* ghost;
-  Player* knightWalk;
+  //Player* knightWalk;
+  std::vector<Drawable*> sprites;
 
   SDL_Color colour;
 
