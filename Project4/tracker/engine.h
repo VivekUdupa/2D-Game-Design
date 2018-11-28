@@ -45,7 +45,7 @@ private:
  
  // Drawable* ghost;
   Player* knightWalk;
-  TwoWayMultiSprite* zombieFall;
+  //TwoWayMultiSprite* zombieFall;
 
   SDL_Color colour;
 

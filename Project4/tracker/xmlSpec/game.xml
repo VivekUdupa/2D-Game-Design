@@ -8,7 +8,7 @@
 <frameCapOn>true</frameCapOn>
 <period>17</period>
 
-<maxFrames>300</maxFrames>
+<maxFrames>30000</maxFrames>
 <username>vkoodli</username>
 
 <view>
@@ -148,7 +148,7 @@
 <ghost>
   <file>assets/ghost.png</file>
   <startLoc x="500" y="300"/>
-  <count>2</count>
+  <count>12</count>
   <frames>2</frames>
   <rightframes>1</rightframes>
   <leftframes>1</leftframes>
