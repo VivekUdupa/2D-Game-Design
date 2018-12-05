@@ -22,6 +22,7 @@ OBJS = \
 	sprite.o \
 	multisprite.o \
 	twoWayMultiSprite.o \
+	projectile.o \
 	player.o \
 	smartSprite.o \
 	chunk.o \

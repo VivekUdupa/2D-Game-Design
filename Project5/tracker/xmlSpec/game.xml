@@ -130,9 +130,10 @@
   <speedY>500</speedY>
   <transparency>false</transparency>
   <chunk>
-  	<size>20</size>
-	<distance>200</distance>
+  	<size>50</size>
+	<distance>90</distance>
   </chunk>
+  <projectileName>Spear</projectileName>
 </knightWalk>
 
 <zombieFall>
@@ -168,5 +169,20 @@
 	<distance>200</distance>
   </chunk>
 </ghost>
+
+<Spear>
+  <file>assets/Spear.png</file>
+  <startLoc x="0" y="0"/>
+  <frames>2</frames>
+  <rightframes>1</rightframes>
+  <leftframes>1</leftframes>
+  <frameInterval>0</frameInterval>
+  <imageWidth>90</imageWidth>
+  <imageHeight>175</imageHeight>
+  <speedX>400</speedX>
+  <speedY>0</speedY>
+  <maxDistance>400</maxDistance>
+  <transparency>false</transparency>
+</Spear>
 
 </GameData>

@@ -23,7 +23,7 @@ Player::Player( const std::string& name):
 	worldHeight( Gamedata::getInstance().getXmlInt("world/height") ),
 	collision(false),
 	initialVelocity( getVelocity() )
-	{ }
+	{ setVelocityY( 0 ); }
 
 Player::Player(const Player& s) :
 	Drawable(s),
@@ -39,7 +39,7 @@ Player::Player(const Player& s) :
 	worldHeight(s.worldHeight),
 	collision(s.collision),
 	initialVelocity(s.initialVelocity)
-	{}
+	{ setVelocityY(0); }
 
 Player& Player::operator=(const Player& s) {
 	Drawable::operator=(s);
@@ -104,19 +104,7 @@ void Player::up() {
 }
 
 void Player::jump() {
-	int jumpHeight = 100;
-	int jumping = 0;
-
-	while(jumping++ < 2*jumpHeight) {
-		if(jumping < jumpHeight) {
-			setVelocityX( initialVelocity[0] );
-			setVelocityY( - initialVelocity[1] );
-		}
-		if(jumping > jumpHeight) {
-			setVelocityX( initialVelocity[0] );
-			setVelocityY( initialVelocity[1] );
-		}
-	}
+	setVelocityY( -initialVelocity[1] );
 }
 
 void Player::update(Uint32 ticks) {
@@ -158,7 +146,12 @@ void Player::update(Uint32 ticks) {
 		setVelocityX( fabs(getVelocityX()) );
 	} 
 	
-	stop();
+	setVelocityX( 0 );
+	if(getVelocityY() < 0){
+		setVelocityY( getVelocityY() + 10);
+	}
+	//stop();
+
 }
 
 void Player::advanceFrame(Uint32 ticks) {
