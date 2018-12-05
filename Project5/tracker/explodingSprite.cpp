@@ -66,8 +66,8 @@ void ExplodingSprite::makeChunks(unsigned int n) {
       Image* image = 
         proto->crop({source_x,source_y,chunk_width,chunk_height});
       Chunk* chunk = new Chunk(
-                Vector2f(getX()+source_x,   // x coord of destination 
-                         getY()+source_y),  // y coord of destination
+                Vector2f(getX()+getScale()*source_x,   // x coord of destination 
+                         getY()+getScale()*source_y),  // y coord of destination
                 Vector2f(sx, sy),
                 getName()+"/chunk",
                 image);

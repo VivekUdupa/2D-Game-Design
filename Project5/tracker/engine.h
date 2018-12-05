@@ -40,7 +40,8 @@ private:
   int currentSprite;
   bool collision;
  
-  std::vector<Drawable*> sprites;
+  std::vector<SmartSprite*> sprites;
+  std::vector<Player*> player;
 
   SDL_Color colour;
 

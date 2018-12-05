@@ -61,6 +61,7 @@ Player& Player::operator=(const Player& s) {
 void Player::explode() {
 	if(!explosion) {
 	Sprite sprite(getName(), getPosition(), getVelocity(), images[currentFrame]);
+	sprite.setScale( getScale() );
 	explosion = new ExplodingSprite(sprite);
 	}
 }
@@ -99,6 +100,22 @@ void Player::down() {
 void Player::up() {
 	if( getY() > 0 ) {
 		setVelocityY( -initialVelocity[1] );		
+	}
+}
+
+void Player::jump() {
+	int jumpHeight = 100;
+	int jumping = 0;
+
+	while(jumping++ < 2*jumpHeight) {
+		if(jumping < jumpHeight) {
+			setVelocityX( initialVelocity[0] );
+			setVelocityY( - initialVelocity[1] );
+		}
+		if(jumping > jumpHeight) {
+			setVelocityX( initialVelocity[0] );
+			setVelocityY( initialVelocity[1] );
+		}
 	}
 }
 

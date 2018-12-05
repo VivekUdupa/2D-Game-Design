@@ -130,7 +130,7 @@
   <speedY>500</speedY>
   <transparency>false</transparency>
   <chunk>
-  	<size>200</size>
+  	<size>20</size>
 	<distance>200</distance>
   </chunk>
 </knightWalk>

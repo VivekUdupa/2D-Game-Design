@@ -32,6 +32,7 @@ public:
 	void left();
 	void up();
 	void down();
+	void jump();
 	void stop();
 
 	void attach( SmartSprite* o) {observers.emplace_back(o); }
