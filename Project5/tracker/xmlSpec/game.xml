@@ -119,7 +119,7 @@
 
 <knightWalk>
   <file>assets/knightWalk.png</file>
-  <startLoc x="100" y="329"/>
+  <startLoc x="100" y="380"/>
   <frames>14</frames>
   <rightframes>7</rightframes>
   <leftframes>7</leftframes>

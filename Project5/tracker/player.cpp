@@ -22,7 +22,8 @@ Player::Player( const std::string& name):
 	worldWidth( Gamedata::getInstance().getXmlInt("world/width") ),
 	worldHeight( Gamedata::getInstance().getXmlInt("world/height") ),
 	collision(false),
-	initialVelocity( getVelocity() )
+	initialVelocity( getVelocity() ),
+	jumping(false)
 	{ setVelocityY( 0 ); }
 
 Player::Player(const Player& s) :
@@ -38,7 +39,8 @@ Player::Player(const Player& s) :
 	worldWidth(s.worldWidth),
 	worldHeight(s.worldHeight),
 	collision(s.collision),
-	initialVelocity(s.initialVelocity)
+	initialVelocity(s.initialVelocity),
+	jumping(s.jumping)
 	{ setVelocityY(0); }
 
 Player& Player::operator=(const Player& s) {
@@ -55,6 +57,7 @@ Player& Player::operator=(const Player& s) {
 	worldHeight = (s.worldHeight);
 	collision = s.collision;
 	initialVelocity = (s.initialVelocity);
+	jumping = (s.jumping);
 	return *this;
 }
 
@@ -92,7 +95,9 @@ void Player::left() {
 }
 
 void Player::down() {
-	if ( getY() < worldHeight- getScaledHeight() ) {
+	//if ( getY() < worldHeight- getScaledHeight() ) {
+	std::cout << "Y pos is: " << getY() << std::endl;
+	if ( getY() < 380) {
 		setVelocityY( initialVelocity[1]);
 	}
 }
@@ -104,7 +109,10 @@ void Player::up() {
 }
 
 void Player::jump() {
-	setVelocityY( -initialVelocity[1] );
+	if(!jumping){
+		setVelocityY( -initialVelocity[1] );
+		jumping = true;
+	}
 }
 
 void Player::update(Uint32 ticks) {
@@ -146,11 +154,26 @@ void Player::update(Uint32 ticks) {
 		setVelocityX( fabs(getVelocityX()) );
 	} 
 	
-	setVelocityX( 0 );
-	if(getVelocityY() < 0){
-		setVelocityY( getVelocityY() + 10);
+	if(jumping){
+		setVelocityX( 0 );
+		if(getY() < 260){
+			setVelocityY( getVelocityY() + 70 );
+			std::cout << "Going up, slowing down" << getY() << std::endl;
+		}
+		else if( getY() > 380 ) {
+			setVelocityY(0);
+			std::cout << "Stop" << getVelocityY()  << std::endl;
+			jumping = false;
+			setY(380);
+		}
+		//else {
+		//	setVelocityY( getVelocityY() - 10);
+		//	std::cout << "Coming Down" << getVelocityY() - 10  << std::endl;
+		//}
 	}
-	//stop();
+	else{
+		stop();
+	}
 
 }
 

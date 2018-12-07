@@ -57,6 +57,7 @@ private:
 	
 	bool collision;
 	Vector2f initialVelocity;
+	bool jumping;
 
 	void advanceFrame(Uint32 ticks);
 	Player& operator=(const Player&);
