@@ -8,7 +8,7 @@
 <frameCapOn>true</frameCapOn>
 <period>17</period>
 
-<maxFrames>30000</maxFrames>
+<maxFrames>300</maxFrames>
 <username>vkoodli</username>
 
 <view>
@@ -37,24 +37,41 @@
 </world>
 
 <HUD>
-	<text>a,s,d,w -> left, down, right and up respectively</text>
-	<width>350</width>
-	<height>280</height>
+	<textCount>4</textCount>
+	<text>a,s,d,w -> Movement</text>
+	<text2>LSHIFT -> Shoot</text2>
+	<text3>Space -> Jump</text3>
+	<text4>F1 -> Toggle</text4>
+	<width>400</width>
+	<height>270</height>
 	<position x="20" y="90"/>
-	<backgroundColor r="0" g="0" b="255" a="250"/>
+	<backgroundColor r="0" g="0" b="255" a="150"/>
 	<borderColor r="255" g="0" b="0" a="255"/>
 	<textColor r="255" g="0" b="0" a="0"/>
 </HUD>
 
 <HudProj>
-	<text>a,s,d,w -> left, down, right and up respectively</text>
-	<width>350</width>
-	<height>150</height>
+	<textCount>4</textCount>
+	<text>a,s,d,w -> Movement</text>
+	<text2>LSHIFT -> Shoot</text2>
+	<text3>Space -> Jump</text3>
+	<text4>F1 -> Toggle</text4>
+	<width>200</width>
+	<height>100</height>
 	<position x="500" y="50"/>
-	<backgroundColor r="0" g="0" b="255" a="250"/>
+	<backgroundColor r="0" g="0" b="255" a="150"/>
 	<borderColor r="255" g="0" b="0" a="255"/>
 	<textColor r="255" g="0" b="0" a="0"/>
 </HudProj>
+
+<greenSky>
+  <file>assets/greenSky.png</file>
+  <factor>9</factor>
+  <transparency>false</transparency>
+</greenSky>
+
+<greenClouds>
+  <file>assets/greenClouds.png</file>
 
 <greenSky>
   <file>assets/greenSky.png</file>
@@ -129,7 +146,7 @@
 
 <knightWalk>
   <file>assets/knightWalk.png</file>
-  <startLoc x="100" y="329"/>
+  <startLoc x="100" y="380"/>
   <frames>14</frames>
   <rightframes>7</rightframes>
   <leftframes>7</leftframes>
@@ -164,17 +181,21 @@
 <ghost>
   <file>assets/ghost.png</file>
   <startLoc x="500" y="300"/>
-  <count>12</count>
+  <count>10</count>
   <frames>2</frames>
   <rightframes>1</rightframes>
   <leftframes>1</leftframes>
   <frameInterval>150</frameInterval>
   <imageWidth>120</imageWidth>
   <imageHeight>120</imageHeight>
-  <speedX>400</speedX>
+  <speedX>300</speedX>
   <speedY>200</speedY>
   <safeDistance>250</safeDistance>
   <transparency>false</transparency>
+  <chunk>
+  	<size>20</size>
+	<distance>200</distance>
+  </chunk>
 </ghost>
 
 <Spear>
@@ -193,6 +214,5 @@
   <distance>900</distance>
   <interval>100</interval>
 </Spear>
-
 
 </GameData>

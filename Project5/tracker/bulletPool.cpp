@@ -70,6 +70,7 @@ void BulletPool::shoot(const Vector2f& position, const Vector2f& velocity) {
 }
 
 void BulletPool::draw() const { 
+/*
   std::stringstream stream;
   stream << "Active bullets: " << bulletList.size();
   IoMod::getInstance().
@@ -82,6 +83,7 @@ void BulletPool::draw() const {
   for ( Bullet bullet : bulletList ) {
     bullet.draw();
   }
+*/
 }
 
 void BulletPool::update(Uint32 ticks) { 

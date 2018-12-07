@@ -55,3 +55,11 @@ bool ShootingSprite::shooting() {
 std::list<Bullet> ShootingSprite::getBulletList() {
 	return bullets.getBulletList();
 }
+
+int ShootingSprite:: getActiveProj() {
+	return bullets.bulletCount();
+}
+
+int ShootingSprite:: getFreeProj() {
+	return bullets.freeCount();
+}

@@ -7,6 +7,7 @@
 #include "viewport.h"
 #include "gameData.h"
 #include "hud.h"
+#include "hudProj.h"
 #include "smartSprite.h"
 #include "shootingSprite.h"
 
@@ -49,6 +50,7 @@ private:
   bool makeVideo;
 
   Hud& hud;
+  HudProj& hudProj;
 
   void draw() const;
   void update(Uint32);

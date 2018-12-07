@@ -12,6 +12,7 @@
 #include "frameGenerator.h"
 #include "player.h"
 #include "hud.h"
+#include "hudProj.h"
 #include "collisionStrategy.h"
 
 
@@ -49,7 +50,8 @@ Engine::Engine() :
   player(),
   colour({0, 0, 0xff, 0}),
   makeVideo( false ),
-  hud(Hud::getInstance())
+  hud(Hud::getInstance()),
+  hudProj(HudProj::getInstance())
 {
     int n = gdata.getXmlInt("ghost/count"); //Number of ghosts
 	sprites.reserve(n); 
@@ -109,6 +111,7 @@ void Engine::draw() const {
   //knightWalk->draw();
   
   hud.draw();
+  hudProj.draw(player[0]->getActiveProj(), player[0]->getFreeProj());
 
   viewport.draw();
   SDL_RenderPresent(renderer);
@@ -211,6 +214,9 @@ void Engine::play() {
 		}
         if ( keystate[SDL_SCANCODE_F1] ) {
           hud.setON(!hud.isON());
+        }
+        if ( keystate[SDL_SCANCODE_F2] ) {
+          hudProj.setON(!hudProj.isON());
         }
         if (keystate[SDL_SCANCODE_F4] && !makeVideo) {
           std::cout << "Initiating frame capture" << std::endl;
