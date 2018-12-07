@@ -12,6 +12,8 @@ public:
   virtual void draw() const;
   void shoot();
   virtual bool collidedWith(const Drawable*) const;
+  std::list<Bullet> getBulletList();
+  bool shooting();
 
 private:
   std::string bulletName;

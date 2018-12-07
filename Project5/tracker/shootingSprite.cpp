@@ -48,3 +48,10 @@ void ShootingSprite::update(Uint32 ticks) {
   bullets.update(ticks);
 }
 
+bool ShootingSprite::shooting() {
+	return bullets.shooting();
+}
+
+std::list<Bullet> ShootingSprite::getBulletList() {
+	return bullets.getBulletList();
+}

@@ -141,12 +141,23 @@ void Engine::checkForCollisions() {
 	collision = false;
 	auto it = sprites.begin();
 	while( it != sprites.end() ) {
+		//if(!(player[0]->shooting())) {
+		//	for(auto bul : player[0]->getBulletList()) {
+		//		if(strategies[currentStrategy]->execute(**bul, **it)) {
+		//			(*it)->explode();
+		//		}
+		//	}
+		//}
+		
 		if( strategies[currentStrategy]->execute(*player[0], **it) ) {
 		collision = true;
 		player[0]->collided();
 		player[0]->explode();
 		SmartSprite* doa = *it;
-		doa[currentSprite].explode();
+		doa->explode();
+		//if(player[0]->collidedWith(doa)){
+		//	doa[currentSprite].explode();
+		//}
 		//Drawable* doa = *it;
 		player[0]->detach(doa);
 		delete doa;
@@ -163,6 +174,7 @@ void Engine::checkForCollisions() {
 void Engine::switchSprite() {
 	++currentSprite;
 	currentSprite = currentSprite % (player.size());
+	//currentSprite = currentSprite % (sprites.size());
     Viewport::getInstance().setObjectToTrack(player[currentSprite]);
 	} 
 

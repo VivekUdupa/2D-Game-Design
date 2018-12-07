@@ -37,7 +37,11 @@
 </world>
 
 <HUD>
-	<text>a,s,d,w -> left, down, right and up respectively</text>
+	<textCount>4</textCount>
+	<text>a,s,d,w -> Movement</text>
+	<text2>LSHIFT -> Shoot</text2>
+	<text3>Space -> Jump</text3>
+	<text4>F1 -> Toggle</text4>
 	<width>400</width>
 	<height>270</height>
 	<position x="20" y="90"/>
