@@ -75,7 +75,7 @@ Engine::Engine() :
    strategies.push_back( new RectangularCollisionStrategy );
    strategies.push_back( new MidPointCollisionStrategy );
 	
-	std::cout << "Y distance = " << player[0]->getY() << std::endl;
+//	std::cout << "Y distance = " << player[0]->getY() << std::endl;
 
    Viewport::getInstance().setObjectToTrack(player[0]);
    std::cout << "Loading complete" << std::endl;

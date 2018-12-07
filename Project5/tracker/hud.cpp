@@ -61,7 +61,7 @@ void Hud::draw() {
 		FpsString << "FPS: " << Clock::getInstance().getFps() << std::endl;
 		IoMod::getInstance().writeText(FpsString.str(),
 											  getPosition()[0]+3, 
-											  getPosition()[1]+75,
+											  getPosition()[1]+50,
 											  getWidth(),
 											  getTextColor());
 		
@@ -69,23 +69,29 @@ void Hud::draw() {
 		
 		IoMod::getInstance().writeText("LSHIFT -> Shoot",
 											  getPosition()[0]+3, 
-											  getPosition()[1]+125,
+											  getPosition()[1]+100,
 											  getWidth(),
 											  getTextColor());
 	
 	
 		IoMod::getInstance().writeText("Space -> Jump",
 											  getPosition()[0]+3, 
-											  getPosition()[1]+175,
+											  getPosition()[1]+150,
 											  getWidth(),
 											  getTextColor());
 	
 	
 		IoMod::getInstance().writeText("F1 -> Toggle HUD",
 											  getPosition()[0]+3, 
-											  getPosition()[1]+225,
+											  getPosition()[1]+200,
 											  getWidth(),
 											  getTextColor());
 
+	
+		IoMod::getInstance().writeText("F2 -> Toggle Object pool HUD",
+											  getPosition()[0]+3, 
+											  getPosition()[1]+250,
+											  getWidth(),
+											  getTextColor());
 	}	
 }

@@ -101,7 +101,7 @@ void Player::left() {
 
 void Player::down() {
 	//if ( getY() < worldHeight- getScaledHeight() ) {
-	std::cout << "Y pos is: " << getY() << std::endl;
+	//std::cout << "Y pos is: " << getY() << std::endl;
 	if ( getY() < 380) {
 		setVelocityY( initialVelocity[1]);
 	}
@@ -163,11 +163,11 @@ void Player::update(Uint32 ticks) {
 		setVelocityX( 0 );
 		if(getY() < 260){
 			setVelocityY( getVelocityY() + 70 );
-			std::cout << "Going up, slowing down" << getY() << std::endl;
+			//std::cout << "Going up, slowing down" << getY() << std::endl;
 		}
 		else if( getY() > 380 ) {
 			setVelocityY(0);
-			std::cout << "Stop" << getVelocityY()  << std::endl;
+			//std::cout << "Stop" << getVelocityY()  << std::endl;
 			jumping = false;
 			setY(380);
 		}

@@ -80,10 +80,11 @@ void BulletPool::draw() const {
   stream << "Bullet pool: " << freeList.size();
   IoMod::getInstance().
     writeText(stream.str(), 500, 60);
+*/
   for ( Bullet bullet : bulletList ) {
     bullet.draw();
   }
-*/
+
 }
 
 void BulletPool::update(Uint32 ticks) { 
