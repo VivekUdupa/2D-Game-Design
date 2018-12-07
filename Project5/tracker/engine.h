@@ -8,6 +8,7 @@
 #include "gameData.h"
 #include "hud.h"
 #include "smartSprite.h"
+#include "shootingSprite.h"
 
 class Player;
 class CollisionStrategy;
@@ -41,7 +42,7 @@ private:
   bool collision;
  
   std::vector<SmartSprite*> sprites;
-  std::vector<Player*> player;
+  std::vector<ShootingSprite*> player;
 
   SDL_Color colour;
 

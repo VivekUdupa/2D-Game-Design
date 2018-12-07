@@ -65,10 +65,27 @@ void Hud::draw() {
 											  getWidth(),
 											  getTextColor());
 		
-		IoMod::getInstance().writeText("F1 -> Toggle HUD",
+		
+		
+		IoMod::getInstance().writeText("LSHIFT -> Shoot",
 											  getPosition()[0]+3, 
 											  getPosition()[1]+125,
 											  getWidth(),
 											  getTextColor());
-	}
+	
+	
+		IoMod::getInstance().writeText("Space -> Jump",
+											  getPosition()[0]+3, 
+											  getPosition()[1]+175,
+											  getWidth(),
+											  getTextColor());
+	
+	
+		IoMod::getInstance().writeText("F1 -> Toggle HUD",
+											  getPosition()[0]+3, 
+											  getPosition()[1]+225,
+											  getWidth(),
+											  getTextColor());
+
+	}	
 }

@@ -40,6 +40,8 @@ public:
 
 	void explode();
 
+	bool isLookingRight() {return lookingRight;}
+
 protected:
 	std::list<SmartSprite*> observers;
 
@@ -58,6 +60,7 @@ private:
 	bool collision;
 	Vector2f initialVelocity;
 	bool jumping;
+	bool lookingRight;
 
 	void advanceFrame(Uint32 ticks);
 	Player& operator=(const Player&);

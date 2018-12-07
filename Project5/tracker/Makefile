@@ -27,6 +27,9 @@ OBJS = \
 	smartSprite.o \
 	chunk.o \
 	vector2f.o \
+	bullet.o \
+	bulletPool.o \
+	shootingSprite.o \
 	clock.o \
 	engine.o \
 	main.o

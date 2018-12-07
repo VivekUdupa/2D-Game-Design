@@ -23,7 +23,8 @@ Player::Player( const std::string& name):
 	worldHeight( Gamedata::getInstance().getXmlInt("world/height") ),
 	collision(false),
 	initialVelocity( getVelocity() ),
-	jumping(false)
+	jumping(false),
+	lookingRight(true)
 	{ setVelocityY( 0 ); }
 
 Player::Player(const Player& s) :
@@ -40,7 +41,8 @@ Player::Player(const Player& s) :
 	worldHeight(s.worldHeight),
 	collision(s.collision),
 	initialVelocity(s.initialVelocity),
-	jumping(s.jumping)
+	jumping(s.jumping),
+	lookingRight(s.lookingRight)
 	{ setVelocityY(0); }
 
 Player& Player::operator=(const Player& s) {
@@ -58,6 +60,7 @@ Player& Player::operator=(const Player& s) {
 	collision = s.collision;
 	initialVelocity = (s.initialVelocity);
 	jumping = (s.jumping);
+	lookingRight = (s.lookingRight);
 	return *this;
 }
 
@@ -84,6 +87,7 @@ void Player::right() {
 	if( getX() < worldWidth - getScaledWidth()) {
 		setVelocityX(initialVelocity[0]);
 		currentFrame = (currentFrame) % numberOfRightFrames;
+		lookingRight = true;
 	}
 }
 
@@ -91,6 +95,7 @@ void Player::left() {
 	if( getX() > 0 ) {
 		setVelocityX( -initialVelocity[0] );
 		currentFrame = numberOfRightFrames + (currentFrame) % numberOfLeftFrames;
+		lookingRight = false;
 	}
 }
 
@@ -166,10 +171,6 @@ void Player::update(Uint32 ticks) {
 			jumping = false;
 			setY(380);
 		}
-		//else {
-		//	setVelocityY( getVelocityY() - 10);
-		//	std::cout << "Coming Down" << getVelocityY() - 10  << std::endl;
-		//}
 	}
 	else{
 		stop();

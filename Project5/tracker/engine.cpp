@@ -55,7 +55,7 @@ Engine::Engine() :
 	sprites.reserve(n); 
 	
 	{
-	Player* p = new Player("knightWalk");
+	ShootingSprite* p = new ShootingSprite("knightWalk");
 	p->setScale(0.10);
 	player.push_back(p);
 	}	
@@ -69,8 +69,8 @@ Engine::Engine() :
      player[0]->attach(sprites[i]);
    }
 
-   strategies.push_back( new RectangularCollisionStrategy );
    strategies.push_back( new PerPixelCollisionStrategy );
+   strategies.push_back( new RectangularCollisionStrategy );
    strategies.push_back( new MidPointCollisionStrategy );
 	
 	std::cout << "Y distance = " << player[0]->getY() << std::endl;
@@ -102,9 +102,9 @@ void Engine::draw() const {
   }
 	
   strategies[currentStrategy]->draw();
-  if(collision){
-  	IoMod::getInstance().writeText("Oops Collision!!", 500, 100);
-  }
+  //if(collision){
+  	//IoMod::getInstance().writeText("Oops Collision!!", 500, 100);
+  //}
 
   //knightWalk->draw();
   
@@ -206,6 +206,10 @@ void Engine::play() {
         }
 	  	if(keystate[SDL_SCANCODE_SPACE]){
 			player[0]->jump();
+	  	}
+	  	if(keystate[SDL_SCANCODE_LSHIFT]){
+			std::cout << "Shoot Pressed" << std::endl;
+			player[0]->shoot();
 	  	}
 		
         else if (keystate[SDL_SCANCODE_F4] && makeVideo) {
