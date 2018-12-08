@@ -37,6 +37,6 @@ I do not know how to make the smart sprites explode when they collide with the p
 
 Light at the end of the tunnel: 
 I want to design a game where the player must go through a series of obstacles/traps to reach the other end. 
-The player( who is a knight currently ) has to escape through a haunted graveyard where zombies and gosts try to attack him. I want to include pit holes and some other traps which has to be avoided. The knight has to collect a key to unlock the door reaching which concludes the game. 
+The player( who is a knight currently ) has to escape through a haunted graveyard where zombies and gosts try to attack him. I want to include pit holes and some other traps which has to be avoided. The knight has to kill all NPC characters to win the game. 
 
 
