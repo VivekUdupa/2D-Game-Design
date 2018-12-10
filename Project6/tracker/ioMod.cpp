@@ -34,6 +34,14 @@ IoMod::IoMod() :
   textColor.a = Gamedata::getInstance().getXmlInt("font/alpha");
 }
 
+IoMod::IoMod(const IoMod& s) :
+	init(s.init),
+	renderer(s.renderer),
+	font(s.font),
+	textColor(s.textColor),
+	colour(s.colour)
+	{}
+
 SDL_Texture* IoMod::readTexture(const std::string& filename) {
   SDL_Texture *texture = IMG_LoadTexture(renderer, filename.c_str());
   if ( texture == NULL ) {

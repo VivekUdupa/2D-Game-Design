@@ -14,6 +14,9 @@ public:
 
 	virtual void update(Uint32 ticks);
 	void notify(const Vector2f& p) { playerPos = p;}
+
+	bool killSprites() const { return spriteCollide;}
+	virtual void collide();
 	
 private:
 	enum MODE {NORMAL, EVADE};
@@ -21,8 +24,9 @@ private:
 	int playerWidth;
 	int playerHeight;
 	MODE currentMode;
+	bool spriteCollide;
 	float safeDistance;
-
+	
 	void runLeft();
 	void runRight();
 	void runUp();

@@ -106,32 +106,26 @@ void Engine::draw() const {
  greenBridge.draw();
  greenHouse.draw();
  greenGround.draw();
-
- std::stringstream strm;
- strm << "Ghosts Remaining: " << sprites.size() << std::endl;
- io.writeText(strm.str(), 30, 60);
-
-	if(sprites.size()!=0) {
-  		for (const Drawable* sprite : sprites) {
-  		sprite->draw();
-  	}
-  }
-
-  for (const Player* p : player) {
-  	p->draw();
-  }
 	
-  //zombie->draw();
+ for (const Player* p : player) {
+ 	p->draw();
+ }
 
+ for (const Drawable* sprite : sprites) {
+ 	sprite->draw();
+ }
+
+	
   strategies[currentStrategy]->draw();
-  //if(collision){
-  	//IoMod::getInstance().writeText("Oops Collision!!", 500, 100);
-  //}
-
-  //knightWalk->draw();
   
   hud.draw();
   hudProj.draw(player[0]->getActiveProj(), player[0]->getFreeProj());
+
+/*
+ std::stringstream strm;
+ strm << "Ghosts Remaining: " << sprites.size() << std::endl;
+ io.writeText(strm.str(), 30, 60);
+*/
 
   viewport.draw();
   SDL_RenderPresent(renderer);
@@ -172,27 +166,40 @@ void Engine::checkForCollisions() {
 		collision = true;
 		player[0]->collided();
 		player[0]->explode();
+		
 		SmartSprite* doa = *it;
 		player[0]->detach(doa);
 		delete doa;
 		it = sprites.erase(it);
+		
+
 		}
 	else if( player[0]->collidedWith((*it)) ) {
 		(*it)->explode();
+		(*it)->collide();
 		player[0]->missed();
 		collision = false;
-		SmartSprite* doa = *it;
-		player[0]->detach(doa);
-		delete doa;
-		it = sprites.erase(it);
 	}
 	else{
 		++it;
 		player[0]->missed();
 		collision = false;
 	}
+/*
+	auto sp = sprites.begin();
+	while (sp != sprites.end()) {
+		if( (*sp)->killSprites() ) {
+			//(*sp)->explode();
+			player[0]->detach( (*sp) );
+			delete (*sp);
+			sp = sprites.erase(sp);
+		}
+		else{
+			++sp;
+		}
+		}
+*/
 
-		
 	}
 }
 
@@ -255,8 +262,6 @@ void Engine::checkForCollisions() {
 		}
 	}
 */
-
-
 
 void Engine::switchSprite() {
 	++currentSprite;

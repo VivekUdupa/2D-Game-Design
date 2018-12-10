@@ -49,6 +49,7 @@ void Hud::draw() {
 		SDL_SetRenderDrawColor(renderer, borderColor.r, borderColor.g, borderColor.b, borderColor.a);
 		SDL_RenderDrawRect(renderer,&r);
 
+		setText(text);
 		std::ostringstream hudTxt;
 		hudTxt << getText();
 		IoMod::getInstance().writeText(hudTxt.str(),

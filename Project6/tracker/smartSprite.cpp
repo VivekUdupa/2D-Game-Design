@@ -47,6 +47,7 @@ SmartSprite::SmartSprite(const std::string& name, const Vector2f& pos, int w, in
 	playerWidth(w),
 	playerHeight(h),
 	currentMode(NORMAL),
+	spriteCollide(false),
 	safeDistance(Gamedata::getInstance().getXmlFloat(name+"/safeDistance"))
 	{}
 
@@ -57,6 +58,7 @@ SmartSprite::SmartSprite(const SmartSprite& s) :
 	playerWidth(s.playerWidth),
 	playerHeight(s.playerHeight),
 	currentMode(s.currentMode),
+	spriteCollide(s.spriteCollide),
 	safeDistance(s.safeDistance)
 	{}
 
@@ -66,6 +68,7 @@ SmartSprite& SmartSprite::operator=(const SmartSprite& s){
 	playerWidth = (s.playerWidth);
 	playerHeight = (s.playerHeight);
 	currentMode = (s.currentMode);
+	spriteCollide = (s.spriteCollide);
 	safeDistance = (s.safeDistance);
 	return *this;
 }
@@ -91,4 +94,8 @@ void SmartSprite::update(Uint32 ticks) {
 		if(y > ey) { runDown(); }
 	}
 
+}
+
+void SmartSprite::collide() {
+	spriteCollide = true;
 }
