@@ -270,7 +270,7 @@ void Engine::switchSprite() {
     Viewport::getInstance().setObjectToTrack(player[currentSprite]);
 	} 
 
-void Engine::play() {
+bool Engine::play() {
   SDL_Event event;
   const Uint8* keystate;
   bool done = false;
@@ -318,6 +318,9 @@ void Engine::play() {
 			std::cout << "Shoot Pressed" << std::endl;
 			player[0]->shoot();
 	  	}
+	  	if(keystate[SDL_SCANCODE_R]){
+			return true;
+	  	}
 		
         else if (keystate[SDL_SCANCODE_F4] && makeVideo) {
           std::cout << "Terminating frame capture" << std::endl;
@@ -353,4 +356,5 @@ void Engine::play() {
       }
     }
   }
+  return false;
 }
