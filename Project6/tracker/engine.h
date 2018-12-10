@@ -44,6 +44,7 @@ private:
  
   std::vector<SmartSprite*> sprites;
   std::vector<ShootingSprite*> player;
+  //TwoWayMultiSprite* zombie;
 
   SDL_Color colour;
 

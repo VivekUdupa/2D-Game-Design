@@ -7,6 +7,7 @@ class ShootingSprite : public Player{
 public:
   ShootingSprite(const std::string& n);
   ShootingSprite(const ShootingSprite& s);
+//  ShootingSprite& operator=(const ShootingSprite&);
 
   virtual void update(Uint32 ticks);
   virtual void draw() const;

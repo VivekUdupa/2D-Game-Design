@@ -10,7 +10,7 @@ class SmartSprite : public TwoWayMultiSprite {
 public:
 	SmartSprite(const std::string&, const Vector2f& pos, int w, int h);
 	SmartSprite(const SmartSprite&);
-	
+	SmartSprite& operator=(const SmartSprite&);	
 
 	virtual void update(Uint32 ticks);
 	void notify(const Vector2f& p) { playerPos = p;}

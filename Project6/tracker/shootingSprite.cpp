@@ -20,6 +20,16 @@ ShootingSprite::ShootingSprite(const ShootingSprite& s) :
   worldHeight(s.worldHeight)
 { }
 
+/*
+ShootingSprite& ShootingSprite::operator=(const ShootingSprite& s) {
+	ShootingSprite::operator=(s);
+	bulletName = (s.bulletName);
+	bullets = (s.bullets);
+	minSpeed = (s.minSpeed);
+	worldWidth = (s.worldWidth);
+	worldHeight = (s.worldHeight);
+}
+*/
 void ShootingSprite::shoot() { 
   // I'm not adding minSpeed to y velocity:
   if(isLookingRight()) {

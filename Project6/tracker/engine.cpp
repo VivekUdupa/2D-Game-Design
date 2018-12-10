@@ -48,13 +48,17 @@ Engine::Engine() :
   collision(false),
   sprites(),
   player(),
+  //zombie(new TwoWayMultiSprite("zombie")),
   colour({0, 0, 0xff, 0}),
   makeVideo( false ),
   hud(Hud::getInstance()),
   hudProj(HudProj::getInstance())
 {
+   
+   //zombie->setScale(0.48);
+   //zombie->setVelocityY(0);
     int n = gdata.getXmlInt("ghost/count"); //Number of ghosts
-	sprites.reserve(n); 
+	//sprites.reserve(n+1); 
 	
 	{
 	ShootingSprite* p = new ShootingSprite("knightWalk");
@@ -66,10 +70,22 @@ Engine::Engine() :
    int w = player[0]->getScaledWidth();
    int h = player[0]->getScaledHeight();
 
+  
    for (int i = 0; i < n; ++i) {
   	 sprites.push_back(new SmartSprite("ghost", pos, w, h) );
-     player[0]->attach(sprites[i]);
+     //player[0]->attach(sprites[i]);
    }
+
+   SmartSprite* s = new SmartSprite("zombie", pos, w, h);
+   sprites.push_back(s);
+   s->setVelocityY(0);
+   s->setScale(0.47);
+   player[0]->attach(s);
+   
+   for (unsigned int i = 0; i < sprites.size(); ++i) {
+   		player[0]->attach(sprites[i]);
+   }
+   
 
    strategies.push_back( new PerPixelCollisionStrategy );
    strategies.push_back( new RectangularCollisionStrategy );
@@ -95,14 +111,18 @@ void Engine::draw() const {
  strm << "Ghosts Remaining: " << sprites.size() << std::endl;
  io.writeText(strm.str(), 30, 60);
 
-  for (const Drawable* sprite : sprites) {
-  	sprite->draw();
+	if(sprites.size()!=0) {
+  		for (const Drawable* sprite : sprites) {
+  		sprite->draw();
+  	}
   }
 
   for (const Player* p : player) {
   	p->draw();
   }
 	
+  //zombie->draw();
+
   strategies[currentStrategy]->draw();
   //if(collision){
   	//IoMod::getInstance().writeText("Oops Collision!!", 500, 100);
@@ -125,10 +145,14 @@ void Engine::update(Uint32 ticks) {
   	p->update(ticks);
   }
 
-  for (Drawable* sprite : sprites) {
-  	sprite->update(ticks);
-  }
+	if(sprites.size()!=0) {
+  		for (Drawable* sprite : sprites) {
+  		sprite->update(ticks);
+ 	 }
+	}
 
+  //zombie->update(ticks);
+  
   greenSky.update();
   greenClouds.update();
   greenMountains.update();
@@ -144,10 +168,51 @@ void Engine::checkForCollisions() {
 	collision = false;
 	auto it = sprites.begin();
 	while( it != sprites.end() ) {
+	if( strategies[currentStrategy]->execute(*player[0], **it) ) {
+		collision = true;
+		player[0]->collided();
+		player[0]->explode();
+		SmartSprite* doa = *it;
+		player[0]->detach(doa);
+		delete doa;
+		it = sprites.erase(it);
+		}
+	else if( player[0]->collidedWith((*it)) ) {
+		(*it)->explode();
+		player[0]->missed();
+		collision = false;
+		SmartSprite* doa = *it;
+		player[0]->detach(doa);
+		delete doa;
+		it = sprites.erase(it);
+	}
+	else{
+		++it;
+		player[0]->missed();
+		collision = false;
+	}
+
+		
+	}
+}
+
+/*
+void Engine::checkForCollisions() {
+	collision = false;
+	auto it = sprites.begin();
+	while( it != sprites.end() ) {
 		//if(!(player[0]->shooting())) {
 		//	for(auto bul : player[0]->getBulletList()) {
-		//		if(strategies[currentStrategy]->execute(**bul, **it)) {
+				//if(strategies[currentStrategy]->execute(bul, **it)) {
+		//		if(player[0]->collidedWith(*it)){
 		//			(*it)->explode();
+					//player[0]->detach(*it);
+					//delete *it;
+					//it = sprites.erase(it);
+		//			}
+				
+		//		else {
+		//			++it;
 		//		}
 		//	}
 		//}
@@ -157,7 +222,10 @@ void Engine::checkForCollisions() {
 		player[0]->collided();
 		player[0]->explode();
 		SmartSprite* doa = *it;
-		doa->explode();
+
+   		std::cout << "Sprite is: " << player[0]->getName() << std::endl;
+		
+		//doa->explode();
 		//if(player[0]->collidedWith(doa)){
 		//	doa[currentSprite].explode();
 		//}
@@ -171,8 +239,24 @@ void Engine::checkForCollisions() {
 	player[0]->missed();
 	collision = false;
 	} 
+	//}
+	auto sp = sprites.begin();
+		while(sp!=sprites.end() ){
+			if(player[0]->collidedWith(*sp)) {
+				(*sp)->explode();
+				delete (*sp);
+				sp = sprites.erase(sp);
+			}
+			else{
+				++sp;
+			}
+
+			}
+		}
 	}
-}
+*/
+
+
 
 void Engine::switchSprite() {
 	++currentSprite;

@@ -60,6 +60,16 @@ SmartSprite::SmartSprite(const SmartSprite& s) :
 	safeDistance(s.safeDistance)
 	{}
 
+SmartSprite& SmartSprite::operator=(const SmartSprite& s){
+	TwoWayMultiSprite::operator=(s);
+	playerPos = (s.playerPos);
+	playerWidth = (s.playerWidth);
+	playerHeight = (s.playerHeight);
+	currentMode = (s.currentMode);
+	safeDistance = (s.safeDistance);
+	return *this;
+}
+
 void SmartSprite::update(Uint32 ticks) {
 	TwoWayMultiSprite::update(ticks);
 	float x = getX() + getImage()->getWidth()/2;

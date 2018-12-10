@@ -62,6 +62,7 @@ MultiSprite& MultiSprite::operator=(const MultiSprite& s) {
 void MultiSprite::explode() {
 	if(!explosion){
 		Sprite sprite(getName(), getPosition(), getVelocity(), images[currentFrame]);
+		sprite.setScale(getScale());
 		explosion = new ExplodingSprite(sprite);
 	}
 }

@@ -147,24 +147,30 @@
   <bullet>Spear</bullet>
 </knightWalk>
 
-<zombieFall>
-  <file>assets/zombieFall.png</file>
-  <startLoc x="100" y="329"/>
-  <frames>16</frames>
-  <rightframes>8</rightframes>
-  <leftframes>8</leftframes>
-  <frameInterval>550</frameInterval>
-  <imageWidth>90</imageWidth>
-  <imageHeight>175</imageHeight>
-  <speedX>000</speedX>
+<zombie>
+  <file>assets/zombie3.png</file>
+  <startLoc x="700" y="340"/>
+  <count>1</count>
+  <frames>10</frames>
+  <rightframes>5</rightframes>
+  <leftframes>5</leftframes>
+  <frameInterval>250</frameInterval>
+  <imageWidth>240</imageWidth>
+  <imageHeight>310</imageHeight>
+  <speedX>300</speedX>
   <speedY>0</speedY>
+   <chunk>
+  	<size>50</size>
+	<distance>90</distance>
+  </chunk>
+  <safeDistance>250</safeDistance>
   <transparency>false</transparency>
-</zombieFall>
+</zombie>
 
 <ghost>
   <file>assets/ghost.png</file>
   <startLoc x="500" y="300"/>
-  <count>12</count>
+  <count>1</count>
   <frames>2</frames>
   <rightframes>1</rightframes>
   <leftframes>1</leftframes>
@@ -183,7 +189,7 @@
 
 <Spear>
   <file>assets/Spear.png</file>
-  <startLoc x="0" y="0"/>
+  <startLoc x="100" y="380"/>
   <frames>2</frames>
   <rightframes>1</rightframes>
   <leftframes>1</leftframes>

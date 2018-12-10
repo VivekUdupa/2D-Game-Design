@@ -15,6 +15,7 @@ class Player : public Drawable {
 public:
 	Player(const std::string&);
 	Player(const Player&);
+	Player& operator=(const Player&);
 	virtual ~Player();
 
 	virtual void draw() const;
@@ -63,7 +64,6 @@ private:
 	bool lookingRight;
 
 	void advanceFrame(Uint32 ticks);
-	Player& operator=(const Player&);
 
 };
 #endif
