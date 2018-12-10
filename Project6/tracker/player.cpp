@@ -24,6 +24,7 @@ Player::Player( const std::string& name):
 	collision(false),
 	initialVelocity( getVelocity() ),
 	jumping(false),
+	godMode(true),
 	lookingRight(true)
 	{ setVelocityY( 0 ); }
 
@@ -42,6 +43,7 @@ Player::Player(const Player& s) :
 	collision(s.collision),
 	initialVelocity(s.initialVelocity),
 	jumping(s.jumping),
+	godMode(s.godMode),
 	lookingRight(s.lookingRight)
 	{ setVelocityY(0); }
 
@@ -60,6 +62,7 @@ Player& Player::operator=(const Player& s) {
 	collision = s.collision;
 	initialVelocity = (s.initialVelocity);
 	jumping = (s.jumping);
+	godMode = (s.godMode);
 	lookingRight = (s.lookingRight);
 	return *this;
 }

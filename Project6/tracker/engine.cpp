@@ -163,6 +163,7 @@ void Engine::checkForCollisions() {
 	auto it = sprites.begin();
 	while( it != sprites.end() ) {
 	if( strategies[currentStrategy]->execute(*player[0], **it) ) {
+		if(player[0]->isGod()){
 		collision = true;
 		player[0]->collided();
 		player[0]->explode();
@@ -171,8 +172,11 @@ void Engine::checkForCollisions() {
 		player[0]->detach(doa);
 		delete doa;
 		it = sprites.erase(it);
-		
-
+		}
+		else 
+		{
+			collision = false;
+		}
 		}
 	else if( player[0]->collidedWith((*it)) ) {
 		(*it)->explode();
@@ -320,6 +324,9 @@ bool Engine::play() {
 	  	}
 	  	if(keystate[SDL_SCANCODE_R]){
 			return true;
+	  	}
+	  	if(keystate[SDL_SCANCODE_G]){
+			player[0]->toggleGodMode();
 	  	}
 		
         else if (keystate[SDL_SCANCODE_F4] && makeVideo) {

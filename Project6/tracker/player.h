@@ -43,6 +43,9 @@ public:
 
 	bool isLookingRight() {return lookingRight;}
 
+	void toggleGodMode() { godMode = !godMode; }
+	bool isGod() {return godMode;}
+
 protected:
 	std::list<SmartSprite*> observers;
 
@@ -61,6 +64,7 @@ private:
 	bool collision;
 	Vector2f initialVelocity;
 	bool jumping;
+	bool godMode;
 	bool lookingRight;
 
 	void advanceFrame(Uint32 ticks);
