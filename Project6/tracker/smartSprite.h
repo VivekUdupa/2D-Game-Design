@@ -13,11 +13,13 @@ public:
 	SmartSprite& operator=(const SmartSprite&);	
 
 	virtual void update(Uint32 ticks);
+	virtual void draw() const;
+	virtual void explode();
 	void notify(const Vector2f& p) { playerPos = p;}
 
 	bool killSprites() const { return spriteCollide;}
 	virtual void collide();
-	
+
 private:
 	enum MODE {NORMAL, EVADE};
 	Vector2f playerPos;
@@ -25,6 +27,7 @@ private:
 	int playerHeight;
 	MODE currentMode;
 	bool spriteCollide;
+	ExplodingSprite* explosion;
 	float safeDistance;
 	
 	void runLeft();

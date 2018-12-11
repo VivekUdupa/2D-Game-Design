@@ -81,7 +81,7 @@ TwoWayMultiSprite& TwoWayMultiSprite::operator=(const TwoWayMultiSprite& s) {
 void TwoWayMultiSprite::explode() {
 	if(!explosion) {
 		Sprite sprite(getName(), getPosition(), getVelocity(), images[currentFrame]);
-		std::cout << "exploding : " << sprite.getName() << std::endl;
+		std::cout << "exploding From 2way : " << sprite.getName() << std::endl;
 		sprite.setScale( getScale() );
 		explosion = new ExplodingSprite(sprite);
 	}

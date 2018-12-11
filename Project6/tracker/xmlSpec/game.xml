@@ -150,7 +150,7 @@
 <zombie>
   <file>assets/zombie3.png</file>
   <startLoc x="700" y="340"/>
-  <count>1</count>
+  <count>3</count>
   <frames>10</frames>
   <rightframes>5</rightframes>
   <leftframes>5</leftframes>
@@ -170,7 +170,7 @@
 <ghost>
   <file>assets/ghost.png</file>
   <startLoc x="500" y="300"/>
-  <count>1</count>
+  <count>3</count>
   <frames>2</frames>
   <rightframes>1</rightframes>
   <leftframes>1</leftframes>

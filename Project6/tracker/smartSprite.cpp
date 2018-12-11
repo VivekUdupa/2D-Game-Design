@@ -48,6 +48,7 @@ SmartSprite::SmartSprite(const std::string& name, const Vector2f& pos, int w, in
 	playerHeight(h),
 	currentMode(NORMAL),
 	spriteCollide(false),
+	explosion(nullptr),
 	safeDistance(Gamedata::getInstance().getXmlFloat(name+"/safeDistance"))
 	{}
 
@@ -59,6 +60,7 @@ SmartSprite::SmartSprite(const SmartSprite& s) :
 	playerHeight(s.playerHeight),
 	currentMode(s.currentMode),
 	spriteCollide(s.spriteCollide),
+	explosion(s.explosion),
 	safeDistance(s.safeDistance)
 	{}
 
@@ -69,11 +71,22 @@ SmartSprite& SmartSprite::operator=(const SmartSprite& s){
 	playerHeight = (s.playerHeight);
 	currentMode = (s.currentMode);
 	spriteCollide = (s.spriteCollide);
+	explosion = (s.explosion);
 	safeDistance = (s.safeDistance);
 	return *this;
 }
 
 void SmartSprite::update(Uint32 ticks) {
+  if( explosion ) {
+  	explosion->update(ticks);
+	if( explosion->chunkCount() == 0 ) {
+		delete explosion;
+		explosion  = NULL;
+		std::cout << "explode in smartsprite" << std::endl;
+		spriteCollide = true;
+	}
+	return;
+  }
 	TwoWayMultiSprite::update(ticks);
 	float x = getX() + getImage()->getWidth()/2;
 	float y = getY() + getImage()->getHeight()/2;
@@ -97,5 +110,23 @@ void SmartSprite::update(Uint32 ticks) {
 }
 
 void SmartSprite::collide() {
-	spriteCollide = true;
+//	spriteCollide = true;
+	std::cout << "collide in smartsprite" << std::endl;
 }
+
+void SmartSprite::explode() {
+	if(!explosion) {
+		Sprite sprite(getName(), getPosition(), getVelocity(), images[currentFrame]);
+		sprite.setScale( getScale() );
+		explosion = new ExplodingSprite(sprite);
+	}
+}
+
+void SmartSprite::draw() const { 
+  if( explosion ) {
+  	explosion->draw(); 
+	}
+  else images[currentFrame]->draw(getX(), getY(), getScale());
+
+}
+

@@ -114,18 +114,15 @@ void Engine::draw() const {
  for (const Drawable* sprite : sprites) {
  	sprite->draw();
  }
-
 	
   strategies[currentStrategy]->draw();
   
   hud.draw();
   hudProj.draw(player[0]->getActiveProj(), player[0]->getFreeProj());
 
-/*
  std::stringstream strm;
  strm << "Ghosts Remaining: " << sprites.size() << std::endl;
  io.writeText(strm.str(), 30, 60);
-*/
 
   viewport.draw();
   SDL_RenderPresent(renderer);
@@ -134,19 +131,32 @@ void Engine::draw() const {
 void Engine::update(Uint32 ticks) {
   checkForCollisions();
 
-  //knightWalk->update(ticks);
   for (Player* p : player) {
   	p->update(ticks);
   }
 
-	if(sprites.size()!=0) {
-  		for (Drawable* sprite : sprites) {
-  		sprite->update(ticks);
+/*
+   if(sprites.size()!=0) {
+    	for (auto sprite : sprites) {
+  			sprite->update(ticks);
  	 }
+   }
+
+*/
+//Trying to delete the collided sprite during update
+	auto sp = sprites.begin();
+	while(sp != sprites.end() ) {
+		if( (*sp)->killSprites() ) {
+			//delete (*sp);
+			sp = sprites.erase(sp);
+			(*sp)->update(ticks);
+		}
+		else {
+			(*sp)->update(ticks);
+			++sp;
+		}
 	}
 
-  //zombie->update(ticks);
-  
   greenSky.update();
   greenClouds.update();
   greenMountains.update();
@@ -163,24 +173,26 @@ void Engine::checkForCollisions() {
 	auto it = sprites.begin();
 	while( it != sprites.end() ) {
 	if( strategies[currentStrategy]->execute(*player[0], **it) ) {
-		if(player[0]->isGod()){
 		collision = true;
 		player[0]->collided();
 		player[0]->explode();
-		
+	/*
 		SmartSprite* doa = *it;
 		player[0]->detach(doa);
 		delete doa;
 		it = sprites.erase(it);
+	*/
+		++it;
 		}
-		else 
-		{
-			collision = false;
-		}
-		}
+	
 	else if( player[0]->collidedWith((*it)) ) {
 		(*it)->explode();
-		(*it)->collide();
+		//(*it)->collide();
+		//if( (*it)->killSprites() ){
+		//	player[0]->detach( (*it) );
+			//delete (*it);
+		//	it = sprites.erase(it);
+		//}
 		player[0]->missed();
 		collision = false;
 	}
@@ -189,83 +201,9 @@ void Engine::checkForCollisions() {
 		player[0]->missed();
 		collision = false;
 	}
-/*
-	auto sp = sprites.begin();
-	while (sp != sprites.end()) {
-		if( (*sp)->killSprites() ) {
-			//(*sp)->explode();
-			player[0]->detach( (*sp) );
-			delete (*sp);
-			sp = sprites.erase(sp);
-		}
-		else{
-			++sp;
-		}
-		}
-*/
 
 	}
 }
-
-/*
-void Engine::checkForCollisions() {
-	collision = false;
-	auto it = sprites.begin();
-	while( it != sprites.end() ) {
-		//if(!(player[0]->shooting())) {
-		//	for(auto bul : player[0]->getBulletList()) {
-				//if(strategies[currentStrategy]->execute(bul, **it)) {
-		//		if(player[0]->collidedWith(*it)){
-		//			(*it)->explode();
-					//player[0]->detach(*it);
-					//delete *it;
-					//it = sprites.erase(it);
-		//			}
-				
-		//		else {
-		//			++it;
-		//		}
-		//	}
-		//}
-		
-		if( strategies[currentStrategy]->execute(*player[0], **it) ) {
-		collision = true;
-		player[0]->collided();
-		player[0]->explode();
-		SmartSprite* doa = *it;
-
-   		std::cout << "Sprite is: " << player[0]->getName() << std::endl;
-		
-		//doa->explode();
-		//if(player[0]->collidedWith(doa)){
-		//	doa[currentSprite].explode();
-		//}
-		//Drawable* doa = *it;
-		player[0]->detach(doa);
-		delete doa;
-		it = sprites.erase(it);
-		}
-	else{
-	++it;
-	player[0]->missed();
-	collision = false;
-	} 
-	//}
-	auto sp = sprites.begin();
-		while(sp!=sprites.end() ){
-			if(player[0]->collidedWith(*sp)) {
-				(*sp)->explode();
-				delete (*sp);
-				sp = sprites.erase(sp);
-			}
-			else{
-				++sp;
-			}
-
-			}
-		}
-	}
-*/
 
 void Engine::switchSprite() {
 	++currentSprite;
@@ -319,7 +257,6 @@ bool Engine::play() {
 			player[0]->jump();
 	  	}
 	  	if(keystate[SDL_SCANCODE_LSHIFT]){
-			std::cout << "Shoot Pressed" << std::endl;
 			player[0]->shoot();
 	  	}
 	  	if(keystate[SDL_SCANCODE_R]){
