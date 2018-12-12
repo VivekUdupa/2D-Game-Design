@@ -26,7 +26,6 @@ public:
   void toggleMusic();    // toggle music on/off
   void operator[](int);  // play the indexed sound
 
-  //void godModeSound() { stopCurrentSound(); setSound(0); }; //God mode sound
   void spear() { stopCurrentSound(); setSound(0); }; //spear throw sound
   void scream() { stopCurrentSound(); setSound(1); }; //scream when enemy sprites die
 

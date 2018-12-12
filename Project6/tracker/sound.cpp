@@ -41,7 +41,6 @@ SDLSound::SDLSound() :
 
   sounds.push_back( Mix_LoadWAV("sound/spearThrow.wav") );
   sounds.push_back( Mix_LoadWAV("sound/scream.wav") );
-  //sounds.push_back( Mix_LoadWAV("sound/background.wav") );
   for (unsigned int i = 0; i < sounds.size(); ++i) channels.push_back(i);
   std::cout << "Music and Sound is loaded" << std::endl;
 }

@@ -15,6 +15,19 @@
 #include "hudProj.h"
 #include "collisionStrategy.h"
 
+// [capture clause] (parameters) -> return-type {body}
+auto Less = [](const Drawable* i, const Drawable* j) {
+  return i->getScale() < j->getScale();
+};
+
+class SpriteLess {
+public:
+  bool operator()(const Drawable* lhs, const Drawable* rhs) const {
+    return lhs->getScale() < rhs->getScale();
+  }
+};
+
+
 
 Engine::~Engine() { 
   for (auto sprite : sprites) {
@@ -23,6 +36,10 @@ Engine::~Engine() {
   
   for (auto p : player) {
   	delete p;
+  }
+  
+  for (auto z : witch) {
+  	delete z;
   }
   
   for (CollisionStrategy* strategy : strategies) {
@@ -51,24 +68,36 @@ Engine::Engine() :
   currentSprite(0),
   collision(false),
   sprites(),
+  witch(),
   player(),
   colour({0, 0, 0xff, 0}),
+  Life(3),
   //sound(),
   makeVideo( false ),
+  gamehud(gameHud::getInstance()),
   hud(Hud::getInstance()),
   hudProj(HudProj::getInstance())
 {
-   
-   //zombie->setScale(0.48);
-   //zombie->setVelocityY(0);
+	//To unpause if it is paused initially
+	clock.unpause();
+
     int n = gdata.getXmlInt("ghost/count"); //Number of ghosts
-	//sprites.reserve(n+1); 
+    int m = gdata.getXmlInt("zombie/count"); //Number of zombies
+    int witchNum = gdata.getXmlInt("witch/count"); //Number of witchs
 	
-	{
+	for(int x = 0; x < witchNum; ++x) {
+		TwoWayMultiSprite* painters = new TwoWayMultiSprite("witch");
+		float sc = Gamedata::getInstance().getRandFloat(0.09,1);
+		painters->setScale(sc);
+		painters->setVelocityY(0);
+		painters->setPosition( Vector2f(Gamedata::getInstance().getRandFloat(0, 800), Gamedata::getInstance().getRandFloat(0, 350) ) );
+		witch.push_back(painters);	
+	}
+	sort(witch.begin(), witch.end(), Less);
+
 	ShootingSprite* p = new ShootingSprite("knightWalk");
 	p->setScale(0.10);
-	player.push_back(p);
-	}	
+	player.push_back(p);	
 
    Vector2f pos = player[0]->getPosition();
    int w = player[0]->getScaledWidth();
@@ -77,36 +106,57 @@ Engine::Engine() :
   
    for (int i = 0; i < n; ++i) {
   	 sprites.push_back(new SmartSprite("ghost", pos, w, h) );
-     //player[0]->attach(sprites[i]);
    }
 
-   SmartSprite* s = new SmartSprite("zombie", pos, w, h);
-   sprites.push_back(s);
-   s->setVelocityY(0);
-   s->setScale(0.47);
-   player[0]->attach(s);
-   
+   for (int i = 0; i < m; ++i) {
+   		SmartSprite* s = new SmartSprite("zombie", pos, w, h);
+   		sprites.push_back(s);
+   		s->setVelocityY(0);
+   		s->setScale(0.47);
+   }
+
    for (unsigned int i = 0; i < sprites.size(); ++i) {
    		player[0]->attach(sprites[i]);
    }
    
-
    strategies.push_back( new PerPixelCollisionStrategy );
    strategies.push_back( new RectangularCollisionStrategy );
    strategies.push_back( new MidPointCollisionStrategy );
 	
-//	std::cout << "Y distance = " << player[0]->getY() << std::endl;
-
    Viewport::getInstance().setObjectToTrack(player[0]);
    std::cout << "Loading complete" << std::endl;
 }
 
 void Engine::draw() const {
+ 
+ // Pointer to draw witches at different layers
+ //std::vector<TwoWayMultiSprite*>::const iterator witchPointer = witch.begin();
+ auto witchPointer = witch.begin();
+ 
  //Background
+ (*witchPointer)->draw(); //witch #1
+ ++witchPointer;
+
  greenSky.draw();
+ 
+// (*witchPointer)->draw(); //witch #2
+// ++witchPointer;
+ 
  greenClouds.draw();
+ 
+ (*witchPointer)->draw(); //witch #3
+ ++witchPointer;
+ 
  greenMountains.draw();
+ 
+ (*witchPointer)->draw(); //witch #4
+ ++witchPointer;
+ 
  greenBuildings.draw();
+ 
+ (*witchPointer)->draw(); //witch #5
+ ++witchPointer;
+ 
  greenBridge.draw();
  greenHouse.draw();
  greenGround.draw();
@@ -114,6 +164,12 @@ void Engine::draw() const {
  for (const Player* p : player) {
  	p->draw();
  }
+/* 
+ for (const TwoWayMultiSprite* wi : witch) {
+ 	wi->draw();
+ }
+*/
+
 
  for (const Drawable* sprite : sprites) {
  	sprite->draw();
@@ -125,8 +181,8 @@ void Engine::draw() const {
   hudProj.draw(player[0]->getActiveProj(), player[0]->getFreeProj());
 
  std::stringstream strm;
- strm << "Ghosts Remaining: " << sprites.size() << std::endl;
- io.writeText(strm.str(), 30, 60);
+ strm << "Enemies Remaining: " << sprites.size() << std::endl;
+ io.writeText(strm.str(), 30, 500);
 
  std::stringstream gmode;
 	if(player[0]->isGod()){
@@ -137,32 +193,46 @@ void Engine::draw() const {
 	}
  io.writeText(gmode.str(), 400, 500);
  
+ std::stringstream lyf;
+ lyf << "Lives Remaining: " << Life << std::endl;
+ io.writeText(lyf.str(), 700, 500);
+ 
+//Gameover Huds
+if(Life < 1) {
+	gamehud.draw(false);
+	clock.pause();
+}
+else if(sprites.size() < 1) {
+	gamehud.draw(true);
+	clock.pause();
+}
+
+
  viewport.draw();
   SDL_RenderPresent(renderer);
 }
 
 void Engine::update(Uint32 ticks) {
+
   checkForCollisions();
+  
+  for (TwoWayMultiSprite* wi : witch) {
+  	wi->update(ticks);
+  }
+
 
   for (Player* p : player) {
   	p->update(ticks);
   }
 
-/*
-   if(sprites.size()!=0) {
-    	for (auto sprite : sprites) {
-  			sprite->update(ticks);
- 	 }
-   }
-
-*/
 //Trying to delete the collided sprite during update
 	auto sp = sprites.begin();
 	while(sp != sprites.end() ) {
 		if( (*sp)->killSprites() ) {
-			//delete (*sp);
+			SmartSprite* doa = *sp;
+			//delete doa;
 			sp = sprites.erase(sp);
-			(*sp)->update(ticks);
+			(doa)->update(ticks);
 		}
 		else {
 			(*sp)->update(ticks);
@@ -191,27 +261,18 @@ void Engine::checkForCollisions() {
 		if(player[0]->isGod()) {
 			
 			(*it)->explode();
-			/*
-			SmartSprite* doa = *it;
-			player[0]->detach(doa);
-			delete doa;
-			it = sprites.erase(it);
-			*/
+			//sound->scream();
 		}
 		else {
 			player[0]->explode();
+			--Life;
 		}
 		++it;
 	}
 	
 	else if( player[0]->collidedWith((*it)) ) {
 		(*it)->explode();
-		//(*it)->collide();
-		//if( (*it)->killSprites() ){
-		//	player[0]->detach( (*it) );
-			//delete (*it);
-		//	it = sprites.erase(it);
-		//}
+		//sound->scream();
 		player[0]->missed();
 		collision = false;
 	}
@@ -227,7 +288,6 @@ void Engine::checkForCollisions() {
 void Engine::switchSprite() {
 	++currentSprite;
 	currentSprite = currentSprite % (player.size());
-	//currentSprite = currentSprite % (sprites.size());
     Viewport::getInstance().setObjectToTrack(player[currentSprite]);
 	} 
 
@@ -259,7 +319,6 @@ bool Engine::play() {
           currentStrategy = (currentStrategy + 1) % strategies.size();
         }
         if ( keystate[SDL_SCANCODE_E] ) {
-			//sprites[currentSprite]->explode();
 			player[currentSprite]->explode();
 		}
         if ( keystate[SDL_SCANCODE_F1] ) {
@@ -277,6 +336,7 @@ bool Engine::play() {
 	  	}
 	  	if(keystate[SDL_SCANCODE_LSHIFT]){
 			player[0]->shoot();
+			//sound->spear();
 	  	}
 	  	if(keystate[SDL_SCANCODE_R]){
 			return true;
@@ -286,8 +346,8 @@ bool Engine::play() {
 	  	}
 		
         else if (keystate[SDL_SCANCODE_F4] && makeVideo) {
-          std::cout << "Terminating frame capture" << std::endl;
-          makeVideo = false;
+          //std::cout << "Terminating frame capture" << std::endl;
+          //makeVideo = false;
         }
       }
     }
@@ -303,13 +363,14 @@ bool Engine::play() {
       if( keystate[SDL_SCANCODE_D] ) {
 	  	player[0]->right();	  
 	  }
+	  /*
       if( keystate[SDL_SCANCODE_W] ) {
 	  	player[0]->up();	 
 	  }
       if( keystate[SDL_SCANCODE_S] ) {
 	  	player[0]->down();	  
 	  }
-	  
+	  */
 	  
 	  draw();
       update(ticks);

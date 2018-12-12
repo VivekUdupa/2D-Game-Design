@@ -100,5 +100,11 @@ void Hud::draw() {
 											  getPosition()[1]+180,
 											  getWidth(),
 											  getTextColor());
+		
+		IoMod::getInstance().writeText("Instructions: Avoid Enemies and beware of Exploding Sprites. Kill all enemies to WIN",
+											  getPosition()[0]+3, 
+											  getPosition()[1]+220,
+											  getWidth(),
+											  getTextColor());
 	}	
 }

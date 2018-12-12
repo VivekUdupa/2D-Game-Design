@@ -4,17 +4,19 @@ Course: CPSC 6160
 
 Clemson Email Address: vkoodli@clemson.edu
 
-Project no: 5
+Project no: 6
 
-Project due date: December 7th, 2018
+Project due date: December 13th, 2018
 
 Project description:
-Foundation to a playable game that includes:
-	-HUD
-	-Object Pooling
-	-Projectile
-	-Explosions
-
+A complete playable game with following features:
+	- A player class that can move left and right, jump and shoot
+	- Enemy sprites that uses observer pattern to avoid contact with the player
+	- Projectiles ( spears ) that are used to kill the enemy sprites.
+	- Object Pooling for the projectiles
+	- Parallax Scrolling and Painters algorithm to give an effect of depth 
+	- Explosion and 
+	- Sound
 
 Where I got my sprites: 
 
@@ -24,19 +26,43 @@ https://craftpix.net/freebies/free-halloween-2d-game-backgrounds/
 The player sprite was taken from :
 https://craftpix.net/freebies/2d-fantasy-knight-free-sprite-sheets/
 
+The enemy sprites were taken from : 
+https://craftpix.net/freebies/2d-game-zombie-character-free-sprite-pack-1/
+
+Witch Sprites were taken from : 
+http://www.freepik.com
+
+Music and Sounds were taken from : 
+http://soundbible.com/royalty-free-sounds-1.html
+
 What sprite did I create (not Sprite or MultiSprite):
-Knight -> This is the player who can be controlled by a,s,d,w. 
-ghosts -> these are smart sprites that has AI. 
+Knight -> This is the player who can be controlled by a, d to move left and right respectively 
+ghosts and Zombie -> these are smart sprites that has AI. 
 Spear -> The projectile.
+Witch -> Simple Two way sprite for Painters algorithm
 
 The easiest part of this project:
-Implementing the HUD
+Implementing the painters algorithm.
 
 Problems that I had in completing this project:
-I do not know how to make the smart sprites explode when they collide with the projectile.
 
-Light at the end of the tunnel: 
-I want to design a game where the player must go through a series of obstacles/traps to reach the other end. 
-The player( who is a knight currently ) has to escape through a haunted graveyard where zombies and gosts try to attack him. I want to include pit holes and some other traps which has to be avoided. The knight has to kill all NPC characters to win the game. 
+The player looses life if the player comes in contact with the explosion. Couldn't figure out a solution for this. 
 
+Adding sounds threw an error. So I have commented out the lines that relate to sound. Please uncomment/comment if errors pop up. 
+
+The following lines corrospond to sound:
+engine.h	-> line 54
+engine.cpp	-> lines 75, 264, 275, 339. 
+
+
+Game Instructions: 
+The goal of the game is to defeat all enemies. The enemy count is on the bottom left of the screen. Player lives are on bottom right. Avoid contact with the enemy sprites and explosions. Contact with explosions causes instant death. 
+
+Controls:
+A and D -> Left and Right
+Space 	-> Jump
+LShift	-> Shoot
+R 		-> Restart
+G		-> GodMode
+E		-> Self Explode
 

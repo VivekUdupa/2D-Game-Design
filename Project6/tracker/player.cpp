@@ -164,7 +164,7 @@ void Player::update(Uint32 ticks) {
 	
 	if(jumping){
 		setVelocityX( 0 );
-		if(getY() < 230){
+		if(getY() < 200){
 			setVelocityY( getVelocityY() + 70 );
 			//std::cout << "Going up, slowing down" << getY() << std::endl;
 		}

@@ -37,14 +37,24 @@
 </world>
 
 <HUD>
-	<text>a,s,d,w -> Movement</text>
+	<text>a,d -> Movement</text>
 	<width>350</width>
-	<height>210</height>
-	<position x="20" y="90"/>
+	<height>320</height>
+	<position x="20" y="50"/>
 	<backgroundColor r="0" g="0" b="255" a="150"/>
 	<borderColor r="255" g="0" b="0" a="255"/>
 	<textColor r="255" g="0" b="0" a="0"/>
 </HUD>
+
+<gameHUD>
+	<text>Game Over</text>
+	<width>350</width>
+	<height>50</height>
+	<position x="250" y="300"/>
+	<backgroundColor r="0" g="0" b="0" a="255"/>
+	<borderColor r="255" g="0" b="0" a="255"/>
+	<textColor r="255" g="255" b="255" a="255"/>
+</gameHUD>
 
 <HudProj>
 	<text>a,s,d,w -> left, down, right and up respectively</text>
@@ -133,7 +143,7 @@
   <frames>14</frames>
   <rightframes>7</rightframes>
   <leftframes>7</leftframes>
-  <frameInterval>150</frameInterval>
+  <frameInterval>250</frameInterval>
   <imageWidth>1477</imageWidth>
   <imageHeight>1057</imageHeight>
   <speedX>500</speedX>
@@ -150,7 +160,7 @@
 <zombie>
   <file>assets/zombie3.png</file>
   <startLoc x="700" y="340"/>
-  <count>3</count>
+  <count>2</count>
   <frames>10</frames>
   <rightframes>5</rightframes>
   <leftframes>5</leftframes>
@@ -160,10 +170,10 @@
   <speedX>300</speedX>
   <speedY>0</speedY>
    <chunk>
-  	<size>50</size>
-	<distance>90</distance>
+  	<size>40</size>
+	<distance>30</distance>
   </chunk>
-  <safeDistance>250</safeDistance>
+  <safeDistance>150</safeDistance>
   <transparency>false</transparency>
 </zombie>
 
@@ -180,8 +190,8 @@
   <speedX>400</speedX>
   <speedY>200</speedY>
    <chunk>
-  	<size>50</size>
-	<distance>90</distance>
+  	<size>25</size>
+	<distance>30</distance>
   </chunk>
   <safeDistance>250</safeDistance>
   <transparency>false</transparency>
@@ -203,5 +213,26 @@
   <distance>900</distance>
   <interval>100</interval>
 </Spear>
+
+<witch>
+  <file>assets/witch.png</file>
+  <startLoc x="500" y="100"/>
+  <count>5</count>
+  <frames>2</frames>
+  <rightframes>1</rightframes>
+  <leftframes>1</leftframes>
+  <frameInterval>150</frameInterval>
+  <imageWidth>200</imageWidth>
+  <imageHeight>135</imageHeight>
+  <speedX>350</speedX>
+  <speedY>0</speedY>
+   <chunk>
+  	<size>50</size>
+	<distance>90</distance>
+  </chunk>
+  <safeDistance>250</safeDistance>
+  <transparency>false</transparency>
+</witch>
+
 
 </GameData>

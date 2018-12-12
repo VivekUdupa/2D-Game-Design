@@ -82,7 +82,6 @@ void SmartSprite::update(Uint32 ticks) {
 	if( explosion->chunkCount() == 0 ) {
 		delete explosion;
 		explosion  = NULL;
-		std::cout << "explode in smartsprite" << std::endl;
 		spriteCollide = true;
 	}
 	return;

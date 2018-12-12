@@ -16,6 +16,7 @@ OBJS = \
 	image.o \
 	imageFactory.o \
 	hud.o \
+	gameHud.o \
 	hudProj.o \
 	sound.o \
 	frameGenerator.o \

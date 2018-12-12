@@ -6,6 +6,7 @@
 #include "world.h"
 #include "viewport.h"
 #include "gameData.h"
+#include "gameHud.h"
 #include "hud.h"
 #include "hudProj.h"
 #include "smartSprite.h"
@@ -44,14 +45,17 @@ private:
   bool collision;
  
   std::vector<SmartSprite*> sprites;
+  std::vector<TwoWayMultiSprite*> witch;
   std::vector<ShootingSprite*> player;
   //TwoWayMultiSprite* zombie;
 
   SDL_Color colour;
+  int Life;
   //SDLSound sound;
 
   bool makeVideo;
 
+  gameHud& gamehud;
   Hud& hud;
   HudProj& hudProj;
 

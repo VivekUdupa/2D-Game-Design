@@ -34,8 +34,6 @@ void Viewport::setObjectToTrack(const Drawable *obj) {
 }
 
 void Viewport::draw() const {
-  IoMod::getInstance().
-    writeText("Tracking: "+objectToTrack->getName(), msgPos[0], msgPos[1]);
   //Printing Name
   IoMod::getInstance().
     writeText("Vivek Koodli Udupa", namePos[0], namePos[1]);
