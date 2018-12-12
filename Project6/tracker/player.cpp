@@ -24,7 +24,7 @@ Player::Player( const std::string& name):
 	collision(false),
 	initialVelocity( getVelocity() ),
 	jumping(false),
-	godMode(true),
+	godMode(false),
 	lookingRight(true)
 	{ setVelocityY( 0 ); }
 

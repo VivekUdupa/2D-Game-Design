@@ -10,6 +10,7 @@
 #include "hudProj.h"
 #include "smartSprite.h"
 #include "shootingSprite.h"
+#include "sound.h"
 
 class Player;
 class CollisionStrategy;
@@ -47,6 +48,7 @@ private:
   //TwoWayMultiSprite* zombie;
 
   SDL_Color colour;
+  //SDLSound sound;
 
   bool makeVideo;
 

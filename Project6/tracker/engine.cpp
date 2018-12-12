@@ -21,6 +21,10 @@ Engine::~Engine() {
   	delete sprite;
   }
   
+  for (auto p : player) {
+  	delete p;
+  }
+  
   for (CollisionStrategy* strategy : strategies) {
   	delete strategy;
   }
@@ -48,8 +52,8 @@ Engine::Engine() :
   collision(false),
   sprites(),
   player(),
-  //zombie(new TwoWayMultiSprite("zombie")),
   colour({0, 0, 0xff, 0}),
+  //sound(),
   makeVideo( false ),
   hud(Hud::getInstance()),
   hudProj(HudProj::getInstance())
@@ -124,7 +128,16 @@ void Engine::draw() const {
  strm << "Ghosts Remaining: " << sprites.size() << std::endl;
  io.writeText(strm.str(), 30, 60);
 
-  viewport.draw();
+ std::stringstream gmode;
+	if(player[0]->isGod()){
+ 		gmode << "God Mode ON " << std::endl;
+	}
+	else {
+ 		gmode << "God Mode OFF " << std::endl;
+	}
+ io.writeText(gmode.str(), 400, 500);
+ 
+ viewport.draw();
   SDL_RenderPresent(renderer);
 }
 
@@ -175,15 +188,21 @@ void Engine::checkForCollisions() {
 	if( strategies[currentStrategy]->execute(*player[0], **it) ) {
 		collision = true;
 		player[0]->collided();
-		player[0]->explode();
-	/*
-		SmartSprite* doa = *it;
-		player[0]->detach(doa);
-		delete doa;
-		it = sprites.erase(it);
-	*/
-		++it;
+		if(player[0]->isGod()) {
+			
+			(*it)->explode();
+			/*
+			SmartSprite* doa = *it;
+			player[0]->detach(doa);
+			delete doa;
+			it = sprites.erase(it);
+			*/
 		}
+		else {
+			player[0]->explode();
+		}
+		++it;
+	}
 	
 	else if( player[0]->collidedWith((*it)) ) {
 		(*it)->explode();
